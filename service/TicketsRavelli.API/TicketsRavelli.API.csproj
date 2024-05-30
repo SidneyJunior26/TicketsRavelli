@@ -1,0 +1,88 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>TicketsRavelli.API</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'TicketsRavelli' " />
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.7">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.13" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pomelo.EntityFrameworkCore.MySql" />
+    <None Remove="Microsoft.EntityFrameworkCore.Design" />
+    <None Remove="Endpoints\Atletas\Get\" />
+    <None Remove="Dapper" />
+    <None Remove="Services\" />
+    <None Remove="Services\Athletes\" />
+    <None Remove="Flunt" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="Swashbuckle" />
+    <None Remove="Controllers\" />
+    <None Remove="Controllers\Secutiry\" />
+    <None Remove="Controllers\Eventos\" />
+    <None Remove="Controllers\RegistrosMedicos\" />
+    <None Remove="Controllers\Regulamentos\" />
+    <None Remove="Controllers\SubCategorias\" />
+    <None Remove="Imagens\" />
+    <None Remove="Controllers\Inscricao\" />
+    <None Remove="Controllers\Pagamentos\" />
+    <None Remove="Controllers\Relatorios\" />
+    <None Remove="Controllers\Pagamentos\Boletos\" />
+    <None Remove="Controllers\Pagamentos\Cartão\" />
+    <None Remove="Controllers\Afiliados\" />
+    <None Remove="Controllers\Pagamentos\Pix\" />
+    <None Remove="Controllers\Testes\" />
+    <None Remove="Filters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Services\Athletes\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Controllers\Secutiry\" />
+    <Folder Include="Controllers\Eventos\" />
+    <Folder Include="Controllers\RegistrosMedicos\" />
+    <Folder Include="Controllers\Regulamentos\" />
+    <Folder Include="Controllers\SubCategorias\" />
+    <Folder Include="Imagens\" />
+    <Folder Include="Controllers\Inscricao\" />
+    <Folder Include="Controllers\Pagamentos\" />
+    <Folder Include="Controllers\Relatorios\" />
+    <Folder Include="Controllers\Pagamentos\Boletos\" />
+    <Folder Include="Controllers\Pagamentos\Cartão\" />
+    <Folder Include="Controllers\Afiliados\" />
+    <Folder Include="Controllers\Pagamentos\Pix\" />
+    <Folder Include="Controllers\Testes\" />
+    <Folder Include="Filters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicketsRavelli.Infrastructure\TicketsRavelli.Infrastructure.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\TicketsRavelli.Application\TicketsRavelli.Application.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\TicketsRavelli.Core\TicketsRavelli.Core.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="credentials.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="credentials.json" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Cadastrar Afiliado</h1>
+  <div mat-dialog-content [formGroup]="afiliadoControl" class="form-fields">
+    <mat-form-field appearance="outline" color="accent" *ngIf="!novoAfiliado">
+      <mat-label>ID</mat-label>
+      <input matInput readonly type="text" formControlName="id" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>CPF</mat-label>
+      <input matInput type="text" formControlName="cpf" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" formControlName="nome" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Porcentagem</mat-label>
+      <input matInput type="number" formControlName="porcentagem" />
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button
+        mat-raised-button
+        class="button-add"
+        color="accent"
+        [disabled]="afiliadoControl.invalid"
+        (click)="novoAfiliado ? cadastrarAfiliado() : atualizarAfliado()"
+      >
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+    </div>
+  </div>
+</div>

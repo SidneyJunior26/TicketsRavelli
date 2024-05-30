@@ -1,0 +1,35 @@
+<div class="container">
+  <div mat-dialog-content [formGroup]="senhaControl" class="formSenha">
+    <h1>Alterar senha</h1>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Nova senha</mat-label>
+      <input matInput formControlName="novaSenha" type="password" />
+      <mat-error *ngIf="senhaControl.get('novaSenha')?.hasError('required')">
+        Este campo é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field style="width: 50vh" appearance="outline" color="accent">
+      <mat-label>Confirme a nova senha</mat-label>
+      <input matInput formControlName="confirmarSenha" type="password" />
+      <mat-error
+        *ngIf="senhaControl.get('confirmarSenha')?.hasError('required')"
+      >
+        Este campo é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <button
+        mat-raised-button
+        color="accent"
+        class="btnUpdate"
+        [class.spinner]="alterandoSenha"
+        [disabled]="senhaControl.invalid"
+        (click)="salvarNovaSenha()"
+      >
+        <mat-icon>save</mat-icon>
+        <span>Salvar</span>
+      </button>
+    </div>
+  </div>
+  <hr />
+</div>

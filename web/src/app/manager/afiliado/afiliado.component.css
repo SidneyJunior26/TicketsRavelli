@@ -1,0 +1,11 @@
+h1 {
+  color: #f9a826;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 15px 40px;
+  width: 60vh;
+  padding: 30px;
+}

@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Gerar Relatórios</h1>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Estolha o relatório</mat-label>
+    <mat-select #selectRelatorio>
+      <mat-option value="0">Relatório de Inscritos</mat-option>
+      <mat-option value="1">Relatório de Inscritos (Categoria)</mat-option>
+      <mat-option value="2">Total de Inscritos - Categoria</mat-option>
+      <mat-option value="3">Total de Inscritos - Efetivados</mat-option>
+      <mat-option value="4">Total de camisas por tamanho</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="exportarParaExcel()" [disabled]="!selectRelatorio.value || gerandoRelatorio">
+    <mat-icon>assessment</mat-icon>{{gerandoRelatorio ? 'Gerando Relatório...' : 'Gerar Relatório'}}
+  </button>
+</div>

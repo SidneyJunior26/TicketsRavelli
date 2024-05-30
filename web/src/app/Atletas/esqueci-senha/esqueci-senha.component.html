@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="formSenha">
+    <div mat-dialog-content [formGroup]="senhaControl">
+      <h1>Esqueci minha senha</h1>
+      <div>
+        <div *ngIf="!codigoEnviado">
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Informe CPF ou E-mail</mat-label>
+            <input matInput #cpfEmail type="text" formControlName="cpfEmail" />
+            <mat-error
+              *ngIf="senhaControl.get('cpfEmail')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="!codigoEnviado">
+          <button
+            mat-raised-button
+            color="accent"
+            [class.spinner]="enviandoCodigo"
+            [disabled]="enviandoCodigo"
+            (click)="enviarCodigo()"
+          >
+            <mat-icon>send</mat-icon>
+            Enviar código de segurança
+          </button>
+        </div>
+        <div *ngIf="!codigoEnviado">
+          <p>
+            Já possuí um código?
+            <a
+              style="text-decoration: underline; cursor: pointer"
+              (click)="jaPossuiCodigo()"
+              >Clique aqui</a
+            >
+          </p>
+        </div>
+        <div style="margin-bottom: 10px" *ngIf="codigoEnviado">
+          <button
+            mat-raised-button
+            color="accent"
+            [class.spinner]="enviandoCodigo"
+            [disabled]="enviandoCodigo || carregandoReenvio"
+            (click)="enviarCodigo()"
+          >
+            <mat-icon>send</mat-icon>
+            <ng-container *ngIf="!carregandoReenvio; else countdownText">
+              Reenviar Código
+            </ng-container>
+            <ng-template #countdownText>
+              <span>{{ countdown }} seg. para reenviar código</span>
+            </ng-template>
+          </button>
+        </div>
+        <div *ngIf="codigoEnviado">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 100%"
+          >
+            <mat-label>Informe o código de segurança</mat-label>
+            <input matInput formControlName="codigoSeguranca" type="text" />
+            <mat-error
+              *ngIf="senhaControl.get('codigoSeguranca')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="codigoEnviado">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 100%"
+          >
+            <mat-label>Informe a nova senha</mat-label>
+            <input
+              matInput
+              formControlName="novaSenha"
+              [type]="esconderSenha ? 'password' : 'text'"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="esconderSenha = !esconderSenha"
+              [attr.aria-label]="'Esconer senha'"
+              [attr.aria-pressed]="esconderSenha"
+            >
+              <mat-icon>{{
+                esconderSenha ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error
+              *ngIf="senhaControl.get('novaSenha')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+            <mat-error
+              *ngIf="senhaControl.get('novaSenha')?.hasError('minlength')"
+            >
+              Senha deve conter pelo menos 8 caracteres
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="codigoEnviado">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 100%"
+          >
+            <mat-label>Confirme a nova senha</mat-label>
+            <input
+              matInput
+              formControlName="confirmaNovaSenha"
+              [type]="esconderConfirmacaoSenha ? 'password' : 'text'"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="esconderConfirmacaoSenha = !esconderConfirmacaoSenha"
+              [attr.aria-label]="'Esconer senha'"
+              [attr.aria-pressed]="esconderConfirmacaoSenha"
+            >
+              <mat-icon>{{
+                esconderConfirmacaoSenha ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error
+              *ngIf="
+                senhaControl.get('novaSenha')?.value !=
+                senhaControl.get('confirmaNovaSenha')?.value
+              "
+            >
+              As senhas não são iguais
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="codigoEnviado">
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="salvarNovaSenha()"
+            [disabled]="senhaControl.invalid || alterandoSenha"
+            [class.spinner]="alterandoSenha"
+          >
+            <mat-icon>save</mat-icon>
+            <span>Salvar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

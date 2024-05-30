@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="div-pacotes" *ngIf="!carregandoPacotes">
+    <div class="div-cabecalho">
+      <h1>PACOTES DISPONÍVEIS</h1>
+      <button mat-icon-button (click)="fecharDialog()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="pacote" *ngIf="pacotes.pacote1Ativo">
+      <h3>{{ pacotes.descricaoPacote1 }}</h3>
+      <h2 class="valor-pacote">
+        Valor: {{ pacotes.valorPacote1 | currency : "BRL" }}
+      </h2>
+    </div>
+    <mat-divider *ngIf="pacotes.pacote2Ativo"></mat-divider>
+    <div class="pacote" *ngIf="pacotes.pacote2Ativo">
+      <h3>{{ pacotes.descricaoPacote2 }}</h3>
+      <h2 class="valor-pacote">
+        Valor: {{ pacotes.valorPacote2 | currency : "BRL" }}
+      </h2>
+    </div>
+    <mat-divider *ngIf="pacotes.pacote3Ativo"></mat-divider>
+    <div class="pacote" *ngIf="pacotes.pacote3Ativo">
+      <h3>{{ pacotes.descricaoPacote3 }}</h3>
+      <h2 class="valor-pacote">
+        Valor: {{ pacotes.valorPacote3 | currency : "BRL" }}
+      </h2>
+    </div>
+    <div class="pacote" *ngIf="pacotes.pacote4Ativo">
+      <h3>{{ pacotes.descricaoPacote4 }}</h3>
+      <span>Valor: </span>
+      <h2 class="valor-pacote">
+        Valor: {{ pacotes.valorPacote4 | currency : "BRL" }}
+      </h2>
+    </div>
+  </div>
+  <div class="div-carregando" *ngIf="carregandoPacotes">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+</div>

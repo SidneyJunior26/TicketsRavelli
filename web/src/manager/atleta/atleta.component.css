@@ -1,0 +1,39 @@
+h1 {
+  color: #f9a826;
+}
+
+.form-fields,
+.divPacotes {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px 40px;
+}
+
+.radio-button {
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #f5dd9d;
+  animation: spinner 0.8s linear infinite;
+}

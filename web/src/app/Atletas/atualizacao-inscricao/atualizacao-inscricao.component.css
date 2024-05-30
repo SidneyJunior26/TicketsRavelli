@@ -1,0 +1,16 @@
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.radio-button {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.container {
+  width: 700px;
+  max-height: 80vh;
+}

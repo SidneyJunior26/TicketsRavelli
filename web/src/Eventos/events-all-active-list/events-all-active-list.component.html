@@ -1,0 +1,120 @@
+<mat-toolbar class="options">
+  <div class="button">
+    <div class="header">
+      <mat-icon>keyboard_arrow_down</mat-icon>
+      <h1>INSCRIÇÕES ABERTAS</h1>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </div>
+    <div *ngIf="eventsOpen.length > 0">
+      <mat-card
+        class="example-card mat-elevation-z8"
+        *ngFor="let eventOpen of eventsOpen"
+      >
+        <mat-card-header>
+          <mat-card-title>{{ eventOpen.nome }}</mat-card-title>
+          <mat-card-subtitle>
+            <span
+              ><mat-icon style="color: #ad2003">location_on</mat-icon
+              >{{ eventOpen.local }}</span
+            >
+          </mat-card-subtitle>
+          <mat-card-subtitle
+            ><mat-icon>calendar_today</mat-icon
+            >{{ eventOpen.data | date : "dd MMMM yyyy" }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="../../../assets/Images/Eventos/{{ eventOpen.imagem }}.png"
+        />
+        <mat-card-content>
+          <p>
+            {{ eventOpen.descricao }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="divSubscribe">
+            <button
+              mat-raised-button
+              class="btnSubscribe"
+              color="accent"
+              [class.spinner]="loadingInscricao"
+              (click)="changeView(eventOpen.id)"
+            >
+              INSCREVA-SE AQUI
+            </button>
+          </div>
+          <div class="divSubscribe">
+            <div class="divInformacoes">
+              <button
+                mat-stroked-button
+                color="accent"
+                class="btnInformacoes"
+                (click)="
+                  abrirValoresPacotesEventos(eventOpen.id, eventOpen.nome)
+                "
+              >
+                Valores
+              </button>
+            </div>
+            <div class="divInformacoes">
+              <button
+                mat-stroked-button
+                color="accent"
+                class="btnInformacoes"
+                (click)="abrirInscricoes(eventOpen.id)"
+              >
+                Lista de Inscritos
+              </button>
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div
+      class="divLoading"
+      *ngIf="!eventsOpen[0] && !loadingEventosAbertos"
+      #loading
+    >
+      <h1>NENHUM EVENTO ABERTO</h1>
+    </div>
+    <div class="divLoading" *ngIf="loadingEventosAbertos" #loading>
+      <mat-spinner color="accent"></mat-spinner>
+    </div>
+  </div>
+  <div class="button">
+    <div class="header">
+      <h1>
+        <mat-icon>keyboard_arrow_down</mat-icon> EM BREVE<mat-icon
+          >keyboard_arrow_down</mat-icon
+        >
+      </h1>
+    </div>
+    <div>
+      <mat-card class="example-card nextEvents" *ngFor="let event of events">
+        <mat-card-header>
+          <mat-card-title>{{ event.nome }}</mat-card-title>
+          <mat-card-subtitle>{{ event.local }}</mat-card-subtitle>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="../../../assets/Images/Eventos/{{ event.imagem }}.png"
+        />
+        <mat-card-content>
+          <p>
+            {{ event.descricao }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+      <div
+        class="divComming"
+        *ngIf="!loadingProximosEventos && events.length == 0"
+      >
+        <h1>NENHUM EVENTO AGENDADO</h1>
+      </div>
+      <div class="divLoading" *ngIf="loadingProximosEventos" #loading>
+        <mat-spinner color="accent"></mat-spinner>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

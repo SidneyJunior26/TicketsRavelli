@@ -1,0 +1,278 @@
+<div class="container">
+  <h1>Ficha Médica</h1>
+  <div mat-dialog-content [formGroup]="dadosMedicosControl">
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label">Possuí Plano de Saúde?</label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="plano"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Qual Plano?</mat-label>
+        <input matInput formControlName="planoTipo" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Qual Empresa?</mat-label>
+        <input matInput formControlName="planoEmpresa" type="text" />
+      </mat-form-field>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label"
+          >Você sofreu alguma cirurgia nos últimos 3 anos?
+        </label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="cirurgia"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Descreva</mat-label>
+        <input matInput formControlName="cirurgiaQual" type="text" />
+      </mat-form-field>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label"
+          >Está usando alguma medicação?
+        </label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="medicacao"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Descreva</mat-label>
+        <input matInput formControlName="medicacaoQual" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Há quanto tempo?</mat-label>
+        <input matInput formControlName="medicacaoTempo" type="text" />
+      </mat-form-field>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label"
+          >Sentiu algum mal estar nos último 30 dias?
+        </label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="malestar"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Descreva</mat-label>
+        <input matInput formControlName="malestarQual" type="text" />
+      </mat-form-field>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label"
+          >Você fez tratamento com acompanhamentos médico contra alguma doença
+          nos últimos 3 anos?
+        </label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="acompanhamento"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Descreva</mat-label>
+        <input matInput formControlName="acompanhamentoQual" type="text" />
+      </mat-form-field>
+    </mat-form-field>
+    <div class="vl"></div>
+    <h1 mat-dialog-title class="title" style="width: 100%">
+      Confirme as enfermidades descritas abaixo
+    </h1>
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label">Pressão Alta</label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="pressaoalta"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+          <input
+            matInput
+            formControlName="pressaoalta"
+            type="text"
+            [style.visibility]="'hidden'"
+          />
+        </mat-radio-group>
+      </div>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label"> Desmaio</label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="desmaio"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+
+          <input
+            matInput
+            formControlName="desmaio"
+            type="text"
+            [style.visibility]="'hidden'"
+          />
+        </mat-radio-group>
+      </div>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label">Problemas Cardíacos</label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="cardiaco"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+          <input
+            matInput
+            formControlName="cardiaco"
+            type="text"
+            [style.visibility]="'hidden'"
+          />
+        </mat-radio-group>
+      </div>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label">Diabetes</label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="diabetes"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+          <input
+            matInput
+            formControlName="diabetes"
+            type="text"
+            [style.visibility]="'hidden'"
+          />
+        </mat-radio-group>
+      </div>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label">Asma</label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="asma"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+          <input
+            matInput
+            formControlName="asma"
+            type="text"
+            [style.visibility]="'hidden'"
+          />
+        </mat-radio-group>
+      </div>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" class="divPlano">
+      <div>
+        <label id="example-radio-group-label">Alergia a Medicamentos </label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="alergia"
+          (change)="setValidators()"
+        >
+          <mat-radio-button class="radio-button" [value]="0">
+            Não
+          </mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="1">
+            Sim
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Descreva</mat-label>
+        <input matInput formControlName="alergiaQual" type="text" />
+      </mat-form-field>
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="dadosMedicosControl.invalid"
+      >
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+    </div>
+  </div>
+</div>

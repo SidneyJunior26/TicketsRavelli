@@ -1,0 +1,45 @@
+import { DadosMedicos } from '../dadosMedicos';
+
+export interface Atleta {
+  [key: string]: any;
+  id?: string;
+  nome: string;
+  nascimento: string;
+  sexo: string;
+  responsavel: string;
+  endereco: string;
+  numero: string;
+  complemento: string;
+  cep: string;
+  cidade: string;
+  uf: string;
+  pais: string;
+  telefone: string;
+  celular: string;
+  email: string;
+  profissao: string;
+  emergenciaContato: string;
+  emergenciaFone: string;
+  emergenciaCelular: string;
+  dataCadastro?: string;
+  camisa: string;
+  camisaCiclismo: string;
+  mktLojaPreferida: string;
+  mktBikePreferida: string;
+  mktAro: string;
+  mktCambio: string;
+  mktFreio: string;
+  mktSuspensao: string;
+  mktMarcaPneu: string;
+  mktModeloPneu: string;
+  mktTenis: string;
+  acesso?: string;
+  ativo?: boolean;
+  federacao: string;
+  cpf: string;
+  rg: string;
+  nivel?: number;
+  codigoSenha?: string;
+  primeiroAcesso?: number;
+  registroMedico?: DadosMedicos;
+}

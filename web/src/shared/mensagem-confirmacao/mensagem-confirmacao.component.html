@@ -1,0 +1,11 @@
+<section>
+  <div mat-dialog-content>
+    <h2>{{ data.mensagem }}</h2>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="cancelar()" cdkFocusInitial>Cancelar</button>
+    <button mat-raised-button (click)="confirmar()" color="warn">
+      Confirmar
+    </button>
+  </div>
+</section>

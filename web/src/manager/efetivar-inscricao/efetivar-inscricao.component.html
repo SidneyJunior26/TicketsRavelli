@@ -1,0 +1,82 @@
+<div class="container">
+  <div [formGroup]="efetivarControl" class="div-dados">
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Valor</mat-label>
+      <input matInput formControlName="valor" type="number" step="0.01" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Método Pagamento</mat-label>
+      <mat-radio-group formControlName="metodoPagamento">
+        <mat-radio-button [value]="0">Boleto</mat-radio-button>
+        <mat-radio-button [value]="1">Pix</mat-radio-button>
+        <mat-radio-button [value]="2">Cortesia</mat-radio-button>
+      </mat-radio-group>
+      <input
+        matInput
+        formControlName="metodoPagamento"
+        type="text"
+        [style.visibility]="'hidden'"
+      />
+    </mat-form-field>
+  </div>
+  <div class="div-loading">
+    <mat-spinner color="accent" *ngIf="loadingInscricoes"></mat-spinner>
+  </div>
+  <mat-form-field appearance="outline" style="width: 100%" color="accent" [hidden]="loadingInscricoes">
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="aplicarFiltroInscricoes()" #input />
+  </mat-form-field>
+  <table
+    mat-table
+    [dataSource]="dsInscricoes"
+    class="mat-elevation-z8"
+    style="width: 100%"
+    [hidden]="loadingInscricoes"
+  >
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-label>Efetivar</mat-label>
+      </th>
+      <td mat-cell *matCellDef="let inscricoes">
+        <button
+          mat-icon-button
+          color="accent"
+          (click)="efetivarAtleta(inscricoes.id)"
+          [disabled]="efetivarControl.invalid"
+          *ngIf="!efetivandoInscricao"
+        >
+          <mat-icon>assignment_turned_in</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" *ngIf="efetivandoInscricao">
+          <mat-spinner [diameter]="50" color="accent"></mat-spinner>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="cpf" color="accent">
+      <th mat-header-cell *matHeaderCellDef>CPF/CNPJ</th>
+      <td mat-cell *matCellDef="let inscricoes">
+        {{ inscricoes.cpfAtleta | CPF }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="nome" color="accent">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let inscricoes">
+        {{ inscricoes.atleta.nome }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="pacote" color="accent">
+      <th mat-header-cell *matHeaderCellDef>Pacote</th>
+      <td mat-cell *matCellDef="let inscricoes">{{ inscricoes.pacote }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsInscricoes"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsInscricoes"></tr>
+  </table>
+  <mat-paginator
+    #paginatorInscricoes
+    [length]="100"
+    pageSize="5"
+    showFirstLastpnl-buttons
+    [hidePageSize]="true"
+  >
+  </mat-paginator>
+</div>

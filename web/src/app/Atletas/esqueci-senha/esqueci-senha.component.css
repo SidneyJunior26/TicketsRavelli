@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+.container {
+  height: 100vh;
+}
+
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 40px !important;
+}
+
+.formSenha {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #424242;
+  border-radius: 10px;
+  margin: 30px 10vh 10vh 10vh;
+  padding: 50px;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #f5dd9d;
+  animation: spinner 0.8s linear infinite;
+}

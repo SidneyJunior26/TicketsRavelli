@@ -1,0 +1,21 @@
+.container {
+  max-height: 80vh;
+}
+
+table {
+  padding: 20px;
+  max-height: 200px;
+}
+
+th,
+td {
+  padding: 20px;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}

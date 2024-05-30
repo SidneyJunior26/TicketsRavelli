@@ -1,0 +1,152 @@
+section {
+  color: white;
+  width: 100%;
+  min-height: 1000px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  color: white;
+}
+
+input {
+  color: white;
+}
+
+mat-tab-group {
+  margin-top: 20px;
+  width: 100%;
+}
+
+mat-radio-button {
+  padding-bottom: 10px;
+}
+
+.container {
+  margin: 40px;
+  padding: 10px 0 0 0;
+  background-color: #424242;
+  border-radius: 10px;
+}
+
+.mat-dialog-actions {
+  margin-top: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.form-fields,
+.divPacotes {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px 40px;
+}
+
+.divPacotes {
+  width: 100%;
+}
+
+.menu {
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.event-main-info {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.info-lateral {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.imagem {
+  width: 20%;
+}
+
+.item {
+  display: flex;
+  gap: 10px;
+}
+
+.pnl-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.pnl-loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+}
+
+.rblGenre {
+  margin-top: 15px;
+  color: white;
+}
+
+.vl {
+  width: 100%;
+  border: 1px solid gray;
+  margin: 10px 0 10px 0;
+}
+
+.btnUpdate {
+  padding: 5px 15px 5px 15px;
+  margin-bottom: 20px;
+}
+
+.btnUpdate mat-icon {
+  margin-right: 5px;
+}
+
+.infoIcon {
+  transform: scale(0.9);
+  font-size: 20px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.radio-button {
+  margin-left: 20px;
+}
+
+.divPlano {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.subscribe-on {
+  color: #61dda0;
+}
+
+.button-add {
+  margin-bottom: 20px;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 16px;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

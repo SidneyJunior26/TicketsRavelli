@@ -1,0 +1,366 @@
+<div class="container">
+  <h1>{{ novoAtleta ? "Cadastrar Atleta" : "Editar Atleta" }}</h1>
+  <div mat-dialog-content [formGroup]="atletaControl" class="form-fields">
+    <mat-form-field style="width: 100%" appearance="outline" color="accent">
+      <mat-label>Nome Completo</mat-label>
+      <input matInput formControlName="nome" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: auto">
+      <mat-label>Data de Nascimento</mat-label>
+      <input
+        (focus)="nascimento.open()"
+        matInput
+        [matDatepicker]="nascimento"
+        formControlName="nascimento"
+        readonly="true"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="nascimento"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #nascimento></mat-datepicker>
+      <mat-error *ngIf="atletaControl.get('nascimento')?.hasError('required')">
+        Este campo é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Sexo</mat-label>
+      <mat-select formControlName="sexo">
+        <mat-option value="1">Masculino</mat-option>
+        <mat-option value="2">Feminino</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field
+      style="width: 100%"
+      appearance="outline"
+      color="accent"
+      color="accent"
+    >
+      <mat-label>Responsável (Menor de Idade)</mat-label>
+      <input matInput formControlName="responsavel" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>CPF</mat-label>
+      <input matInput formControlName="cpf" type="text" mask="000.000.000-00" (focusout)="verificarUsuarioJaExisteCPF()"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>RG</mat-label>
+      <input matInput formControlName="rg" type="text" mask="00.000.000-0" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>CEP</mat-label>
+      <input
+        matInput
+        formControlName="cep"
+        type="text"
+        mask="00000-000"
+        (keyup)="carregarEndereco(atletaControl.get('cep')!.value!)"
+      />
+    </mat-form-field>
+    <mat-form-field
+      style="width: 70%"
+      appearance="outline"
+      color="accent"
+      color="accent"
+    >
+      <mat-label>Endereço</mat-label>
+      <input matInput formControlName="endereco" type="text" />
+    </mat-form-field>
+    <mat-form-field style="width: 20%" appearance="outline" color="accent">
+      <mat-label>Número</mat-label>
+      <input matInput formControlName="numero" />
+    </mat-form-field>
+    <mat-form-field style="width: 60%" appearance="outline" color="accent">
+      <mat-label>Complemento</mat-label>
+      <input matInput formControlName="complemento" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Cidade</mat-label>
+      <input matInput formControlName="cidade" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Estado</mat-label>
+      <input matInput formControlName="uf" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 52%">
+      <mat-label>Pais</mat-label>
+      <input matInput formControlName="pais" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Profissão</mat-label>
+      <input matInput formControlName="profissao" type="text" />
+    </mat-form-field>
+    <div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Federação</mat-label>
+        <input matInput formControlName="federacao" type="text" />
+      </mat-form-field>
+      <mat-icon class="infoIcon" matTooltip="Identidade de um atleta federado."
+        >help</mat-icon
+      >
+    </div>
+    <div class="vl"></div>
+    <h1 mat-dialog-title class="title" style="width: 100%">Contato</h1>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Telefone</mat-label>
+      <input
+        matInput
+        formControlName="telefone"
+        type="text"
+        mask="(00) 0000-0000"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Celular</mat-label>
+      <input
+        matInput
+        formControlName="celular"
+        type="text"
+        mask="(00) 00000-0000"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" type="email" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Contato de Emergência</mat-label>
+      <input
+        matInput
+        formControlName="emergenciaContato"
+        type="text"
+        placeholder="Nome"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Celular Emergência</mat-label>
+      <input
+        matInput
+        formControlName="emergenciaCelular"
+        mask="(00) 00000-0000"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Telefone Emergência</mat-label>
+      <input
+        matInput
+        formControlName="emergenciaTelefone"
+        mask="(00) 0000-0000"
+      />
+    </mat-form-field>
+    <div class="vl"></div>
+    <h1 mat-dialog-title class="title" style="width: 100%">Adicionais</h1>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <div>Selecione um tamanho para Camisa</div>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        formControlName="camisa"
+      >
+        <mat-radio-button
+          class="radio-button"
+          value="Masculino P"
+          *ngIf="atletaControl.get('sexo')?.value == '1'"
+        >
+          P
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Masculino M"
+          *ngIf="atletaControl.get('sexo')?.value == '1'"
+        >
+          M
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Masculino G"
+          *ngIf="atletaControl.get('sexo')?.value == '1'"
+        >
+          G
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Masculino GG"
+          *ngIf="atletaControl.get('sexo')?.value == '1'"
+        >
+          GG
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Masculino XG"
+          *ngIf="atletaControl.get('sexo')?.value == '1'"
+        >
+          XG
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Feminino P"
+          *ngIf="atletaControl.get('sexo')?.value == '2'"
+        >
+          P
+        </mat-radio-button>
+        <mat-radio-button class="radio-button" value="Feminino M">
+          M
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Feminino G"
+          *ngIf="atletaControl.get('sexo')?.value == '2'"
+        >
+          G
+        </mat-radio-button>
+      </mat-radio-group>
+      <input
+        matInput
+        formControlName="camisa"
+        type="text"
+        [style.visibility]="'hidden'"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <div>Selecione um tamanho para Camisa <i>(Ciclismo)</i>*</div>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        formControlName="camisaCiclismo"
+      >
+        <mat-radio-button
+          class="radio-button"
+          value="Masculino P"
+          *ngIf="atletaControl.get('sexo')?.value == '1'"
+        >
+          P
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Masculino M"
+          *ngIf="atletaControl.get('sexo')?.value == '1'"
+        >
+          M
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Masculino G"
+          *ngIf="atletaControl.get('sexo')?.value == '1'"
+        >
+          G
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Masculino GG"
+          *ngIf="atletaControl.get('sexo')?.value == '1'"
+        >
+          GG
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Masculino XG"
+          *ngIf="atletaControl.get('sexo')?.value == '1'"
+        >
+          XG
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Feminino P"
+          *ngIf="atletaControl.get('sexo')?.value == '2'"
+        >
+          P
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Feminino M"
+          *ngIf="atletaControl.get('sexo')?.value == '2'"
+        >
+          M
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button"
+          value="Feminino G"
+          *ngIf="atletaControl.get('sexo')?.value == '2'"
+        >
+          G
+        </mat-radio-button>
+      </mat-radio-group>
+      <input
+        matInput
+        formControlName="camisaCiclismo"
+        type="text"
+        [style.visibility]="'hidden'"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 30%">
+      <mat-label>Loja de bike preferida</mat-label>
+      <input matInput formControlName="mktLojaPreferida" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 30%">
+      <mat-label>Marca/Modelo da sua bike</mat-label>
+      <input matInput formControlName="mktBikePreferida" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 30%">
+      <mat-label>Marca/Modelo do seu câmbio/grupo</mat-label>
+      <input matInput formControlName="mktCambio" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 30%">
+      <mat-label>Marca/Modelo do seu Freio</mat-label>
+      <input matInput formControlName="mktFreio" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 30%">
+      <mat-label>Marca/Modelo da sua suspensão</mat-label>
+      <input matInput formControlName="mktSuspensao" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 30%">
+      <mat-label>Marca do pneu da sua bike</mat-label>
+      <input matInput formControlName="mktMarcaPneu" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 30%">
+      <mat-label>Modelo do pneu da sua bkie</mat-label>
+      <input matInput formControlName="mktModeloPneu" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 30%">
+      <mat-label>Marca de Tênis Preferido</mat-label>
+      <input matInput formControlName="mktTenis" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <div>Qual o tamanho do aro que você utiliza?</div>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        formControlName="mktAro"
+      >
+        <mat-radio-button
+          class="radio-button"
+          value="
+      Aro 26"
+        >
+          Aro 26
+        </mat-radio-button>
+        <mat-radio-button class="radio-button" value="Aro 27,5">
+          Aro 27,5
+        </mat-radio-button>
+        <mat-radio-button class="radio-button" value="Aro 29">
+          Aro 29
+        </mat-radio-button>
+      </mat-radio-group>
+      <input
+        matInput
+        formControlName="mktAro"
+        type="text"
+        [style.visibility]="'hidden'"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Senha</mat-label>
+      <input matInput formControlName="senha" />
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button
+        mat-raised-button
+        class="button-add"
+        color="accent"
+        (click)="salvarAtleta()"
+        [class.spinner]="cadastrandoAtleta"
+        [disabled]="atletaControl.invalid || cadastrandoAtleta"
+      >
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="container">
+  <h1>Afiliados - {{ data.evento.nome }}</h1>
+  <table mat-table [dataSource]="dsAfiliados" multiTemplateDataRows>
+    <ng-container matColumnDef="afiliado" color="accent">
+      <th mat-header-cell *matHeaderCellDef>Afiliado</th>
+      <td mat-cell *matCellDef="let afiliado">
+        {{ afiliado.nome }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="qtde" color="accent">
+      <th mat-header-cell *matHeaderCellDef>Qtde. Inscrições</th>
+      <td mat-cell *matCellDef="let afiliado">
+        {{ afiliado.inscricoes.length }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="porcentagem" color="accent">
+      <th mat-header-cell *matHeaderCellDef>Porcentagem</th>
+      <td mat-cell *matCellDef="let afiliado">{{ afiliado.porcentagem }}%</td>
+    </ng-container>
+    <ng-container matColumnDef="valorTotal" color="accent">
+      <th mat-header-cell *matHeaderCellDef>Vlr. Total</th>
+      <td mat-cell *matCellDef="let afiliado">
+        {{ afiliado.valorTotal | currency : "R$" }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="valorAfiliado" color="accent">
+      <th mat-header-cell *matHeaderCellDef>Vlr. Afiliado</th>
+      <td mat-cell *matCellDef="let afiliado">
+        {{
+          afiliado.valorTotal * (afiliado.porcentagem / 100) | currency : "R$"
+        }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          aria-label="expand row"
+          (click)="
+            expandedElement = expandedElement === element ? null : element;
+            $event.stopPropagation()
+          "
+        >
+          <mat-icon *ngIf="expandedElement === element"
+            >keyboard_arrow_up</mat-icon
+          >
+          <mat-icon *ngIf="expandedElement !== element"
+            >keyboard_arrow_down</mat-icon
+          >
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedDetail">
+      <td
+        mat-cell
+        *matCellDef="let afiliado"
+        [attr.colspan]="columnsToDisplayWithExpand.length"
+      >
+        <div
+          class="element-detail"
+          [@detailExpand]="
+            afiliado == expandedElement ? 'expanded' : 'collapsed'
+          "
+        >
+          <table class="table-inscritos">
+            <ng-container *ngFor="let inscricao of afiliado.inscricoes">
+              <tr>
+                <td>
+                  <h3>Nome</h3>
+                </td>
+                <td>
+                  <h3>Pago</h3>
+                </td>
+                <td>
+                  <h3>Vlr. Pago</h3>
+                </td>
+              </tr>
+              <hr />
+              <tr *ngFor="let inscricao of afiliado.inscricoes">
+                <td>{{ inscricao.atleta.nome }}</td>
+                <td>
+                  <mat-icon *ngIf="!inscricao.pago">hourglass_empty</mat-icon>
+                  <mat-icon *ngIf="inscricao.pago" style="color: #61dda0"
+                    >check_circle</mat-icon
+                  >
+                </td>
+                <td>{{ inscricao.valorPago | currency : "R$" }}</td>
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+    <tr
+      mat-row
+      *matRowDef="let element; columns: columnsToDisplayWithExpand"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['expandedDetail']"
+      class="example-detail-row"
+    ></tr>
+  </table>
+</div>

@@ -1,0 +1,28 @@
+section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.divIcone {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.icone {
+  transform: scale(2);
+}
+
+.divMensagem {
+  text-align: center;
+}
+
+h1 {
+  white-space: pre-line;
+}
+
+.divBotao {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,57 @@
+<div class="containerEventos" [hidden]="carregandoInscricoes || inscricoesAtleta.length == 0">
+  <table
+    mat-table
+    style="width: 100%"
+    [dataSource]="dsInscricoes"
+    *ngIf="dsInscricoes"
+    class="mat-elevation-z8"
+  >
+    <ng-container matColumnDef="evento" color="accent">
+      <th mat-header-cell *matHeaderCellDef>Evento</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.nomeEvento }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="categoria" color="accent">
+      <th mat-header-cell *matHeaderCellDef>Categoria</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.nomeCategoria }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="pacote" color="accent">
+      <th mat-header-cell *matHeaderCellDef>Pacote</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.pacote }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="pago" color="accent">
+      <th mat-header-cell *matHeaderCellDef class="text-center">Pago</th>
+      <td mat-cell *matCellDef="let element" class="text-center">
+        <button
+          mat-icon-button
+          matTooltip="Pago"
+          color="primary"
+          *ngIf="element.pago"
+        >
+          <mat-icon style="color: #61dda0">check_circle</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matTooltip="Aguardando pagamento"
+          color="accent"
+          *ngIf="!element.pago"
+        >
+          <mat-icon>hourglass_empty</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+<div class="div-nenhum-evento" *ngIf="!carregandoInscricoes && inscricoesAtleta.length == 0">
+  <h1>Sem inscrições</h1>
+</div>
+<div class="spinner" *ngIf="carregandoInscricoes">
+  <mat-spinner color="accent"></mat-spinner>
+</div>

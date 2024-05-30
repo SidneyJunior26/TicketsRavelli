@@ -1,0 +1,93 @@
+.footer,
+.desenvolvimento {
+  background-color: #424242;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer {
+  min-height: 100px;
+  padding: 50px;
+  flex-wrap: wrap;
+}
+
+.desenvolvimento {
+  background-color: #424242;
+  color: white;
+  justify-content: center;
+  align-items: end;
+  height: auto;
+  padding-top: 15px;
+}
+
+.contatos {
+  display: flex;
+  flex-direction: column;
+}
+
+.contato {
+  display: flex;
+  gap: 10px;
+}
+
+.contato p,
+.contato a {
+  font-size: 2vh;
+}
+
+.contato a {
+  color: white;
+  margin-bottom: 10px;
+}
+
+h1 {
+  color: #f5dd9d;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.contato mat-icon {
+  font-size: 23px;
+}
+
+mat-icon {
+  font-size: 15px;
+}
+
+.desenvolvimento p {
+  font-size: 15px;
+}
+
+.desenvolvimento span {
+  text-align: end;
+}
+
+.logo-patrocinadores {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ravcarbon-logo {
+  width: 25vh;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    gap: 30px;
+  }
+
+  .patrocinadores {
+    text-align: center;
+  }
+
+  .ravcarbon-logo {
+    width: 40vh;
+  }
+
+  .contatos {
+    width: 100%;
+    align-items: center;
+  }
+}

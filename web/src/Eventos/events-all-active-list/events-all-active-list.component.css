@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+body {
+  background-color: white;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+mat-card-title {
+  display: flex;
+  justify-content: center;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 40px !important;
+  text-align: center;
+  margin: 20px 0 30px 0 !important;
+  color: #f5dd9d;
+}
+
+mat-card-subtitle {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  text-align: center;
+}
+
+mat-card-content {
+  display: flex;
+  justify-content: center;
+  font-size: 17px;
+  text-align: center;
+}
+
+mat-icon {
+  margin-right: 7px;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
+  height: auto;
+  min-height: 60vh;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 10px;
+  background-color: #424242;
+  padding: 10px;
+  border-radius: 5px;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+}
+
+.header mat-icon {
+  color: #ff8b00;
+  font-size: 30px;
+}
+
+h1 {
+  font-size: 50px;
+  color: #f5dd9d;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: bolder;
+  letter-spacing: 0.2rem;
+  line-height: 7vh;
+}
+
+.button {
+  margin: 40px 0 50px 0;
+  min-width: 50vh;
+}
+
+.example-card {
+  position: relative;
+  max-width: 550px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.example-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.3)
+  );
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.example-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+  background-color: #444343;
+}
+
+.example-card:hover::before {
+  left: 100%;
+  opacity: 1;
+}
+
+.nextEvents {
+  min-height: auto;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  white-space: inherit;
+}
+
+.divSubscribe {
+  width: 100%;
+  margin-bottom: 1vh;
+}
+
+.divInformacoes {
+  width: 100%;
+  margin-top: 1vh;
+}
+
+.btnInformacoes {
+  width: 100%;
+  font-weight: bold;
+  font-size: 17px;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btnInformacoes:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+  border-color: #92a68a;
+  color: #92a68a;
+}
+
+.btnSubscribe {
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
+  background-color: #f5dd9d;
+  color: #506266;
+  position: relative;
+  overflow: hidden;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  transition: 0.5s;
+}
+
+.btnSubscribe:hover {
+  background-color: #92a68a;
+  color: white;
+  transform: scale(1.02);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 7px;
+}
+
+mat-expansion-panel-header {
+  justify-content: space-between;
+}
+
+.mat-content > mat-panel-title,
+.mat-content > mat-panel-description {
+  flex: 0 0 auto;
+}
+
+.inputSubscribe {
+  width: 60%;
+  padding: 5px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+.divInputCpf {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.divLoading,
+.divComming {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.divLoading h1 {
+  font-size: 4vh;
+}
+
+.vl {
+  position: fixed;
+  top: 350px;
+}
+
+@media (max-width: 516px) {
+  mat-card-title {
+    font-size: 35px !important;
+  }
+
+  h1 {
+    font-size: 35px;
+  }
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #f5dd9d;
+  animation: spinner 0.8s linear infinite;
+}

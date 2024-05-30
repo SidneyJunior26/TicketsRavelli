@@ -1,0 +1,72 @@
+<div mat-dialog-title>
+  <h2>Faça seu Login</h2>
+</div>
+<div mat-dialog-content [formGroup]="loginControl">
+  <mat-form-field class="input" appearance="fill" color="accent">
+    <mat-label>CPF/CNPJ</mat-label>
+    <input
+      matInput
+      type="text"
+      formControlName="cpf"
+      required
+      mask="000.000.000-00"
+    />
+  </mat-form-field>
+  <mat-form-field class="input" appearance="fill" color="accent">
+    <mat-label>Senha</mat-label>
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      formControlName="password"
+      required
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-checkbox formControlName="rememberMe"
+    >Lembrar meu usuário e senha</mat-checkbox
+  >
+  <p>
+    Esqueceu sua senha?
+    <a href="https://api.whatsapp.com/send?phone=5511972337660" target="_blank"
+      >Clique aqui</a
+    >
+  </p>
+  <p *ngIf="!cadastroEvento">
+    Ainda não é cadastrado?
+    <a (click)="novoAtleta()">Clique aqui</a>
+  </p>
+</div>
+<div mat-dialog-actions [formGroup]="loginControl" class="dialog-actions">
+  <div>
+    <ngx-recaptcha2
+      #captchaElem
+      siteKey="6LeXRuUoAAAAAFOdvB2sJMRE_0tSguwi_8jaejpG"
+      (reset)="handleReset()"
+      (expire)="handleExpire()"
+      (success)="handleSuccess($event)"
+      formControlName="recaptcha"
+    >
+    </ngx-recaptcha2>
+  </div>
+  <div>
+    <button
+      mat-raised-button
+      cdkFocusInitial
+      color="accent"
+      type="submit"
+      [class.spinner]="acessando"
+      (click)="verifyAthlete()"
+      [disabled]="loginControl.invalid || acessando"
+    >
+      Login
+    </button>
+  </div>
+</div>

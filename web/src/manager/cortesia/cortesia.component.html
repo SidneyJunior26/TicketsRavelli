@@ -1,0 +1,81 @@
+<section>
+  <div class="container">
+    <h1><b>CUPONS CORTESIAS</b></h1>
+    <h2><b>Evento:</b> {{ data.evento.nome }}</h2>
+    <mat-form-field appearance="outline" style="width: 100%" color="accent">
+      <mat-label>Filtrar</mat-label>
+      <input matInput (keyup)="aplicarFiltroCortesias($event)" #input />
+    </mat-form-field>
+    <table
+      mat-table
+      [dataSource]="dsCortesias"
+      class="mat-elevation-z8"
+      style="width: 100%"
+    >
+      <ng-container matColumnDef="deletar">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-label>Deletar</mat-label>
+        </th>
+        <td mat-cell *matCellDef="let cortesia">
+          <button
+            mat-stroked-button
+            color="warn"
+            (click)="deletarCupom(cortesia.cupom)"
+          >
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="cupom" color="accent">
+        <th mat-header-cell *matHeaderCellDef>Cupom</th>
+        <td mat-cell *matCellDef="let cortesia">{{ cortesia.cupom }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status" color="accent">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let cortesia" class="text-center">
+          <button
+            mat-icon-button
+            color="accent"
+            *ngIf="cortesia.ativo == 1"
+            matTooltip="Clique para desativar"
+            (click)="alterarStatusCupom(cortesia.cupom)"
+          >
+            <mat-icon style="color: #61dda0">check_circle</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="accent"
+            *ngIf="cortesia.ativo == 0"
+            matTooltip="Clique para ativar"
+            (click)="alterarStatusCupom(cortesia.cupom)"
+          >
+            <mat-icon style="color: red">close</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsCortesias"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsCortesias"></tr>
+    </table>
+    <mat-paginator
+      #paginatorAtleta
+      [length]="100"
+      pageSize="5"
+      showFirstLastpnl-buttons
+      [hidePageSize]="true"
+    >
+    </mat-paginator>
+    <div mat-dialog-actions>
+      <button
+        mat-raised-button
+        class="button-add"
+        color="accent"
+        (click)="gerarCupom()"
+        [class.spinner]="gerandoCupom"
+      >
+        <mat-icon>send</mat-icon>
+        Gerar
+      </button>
+    </div>
+  </div>
+</section>

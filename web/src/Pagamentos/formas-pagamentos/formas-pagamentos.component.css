@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 10px;
+  text-align: center;
+  height: auto;
+  padding: 20px;
+}
+
+.fix-radio-position
+  .mat-expansion-panel
+  .mat-expansion-panel-header
+  mat-panel-description
+  .mat-radio-button {
+  line-height: 2;
+}
+
+.div-aguardando-pagamento {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.div-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+a {
+  color: black;
+}
+
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 40px;
+  color: #f5dd9d;
+}
+
+h3 {
+  color: #f5dd9d;
+}
+
+button {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 25px;
+  color: white;
+}
+
+.btnCancelar {
+  margin-top: 30px;
+  font-size: 20px;
+}
+
+.btn-confirmar-pagamento {
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.img-pix {
+  margin-left: 10px;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #f5dd9d;
+  animation: spinner 0.8s linear infinite;
+}
+
+.qrCode {
+  max-width: 30vh;
+  border-radius: 5px;
+}
+
+.div-copy-pix {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+}
+
+.div-cancelar {
+  margin-top: 10px;
+}

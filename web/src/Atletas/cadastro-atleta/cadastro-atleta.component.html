@@ -1,0 +1,1072 @@
+<section>
+  <mat-tab-group #tabGroup color="accent" mat-align-tabs="center">
+    <mat-tab label="Dados Pessoais">
+      <div class="container">
+        <div
+          mat-dialog-content
+          [formGroup]="athleteControl"
+          class="form-fields"
+          *ngIf="atleta"
+        >
+          <mat-form-field
+            style="width: 100%"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Nome Completo</mat-label>
+            <input matInput formControlName="nome" type="text" />
+            <mat-error *ngIf="athleteControl.get('nome')?.hasError('required')">
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Data de Nascimento</mat-label>
+            <input
+              matInput
+              [matDatepicker]="nascimento"
+              formControlName="nascimento"
+              (change)="validaIdade()"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="nascimento"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #nascimento></mat-datepicker>
+            <mat-error
+              *ngIf="athleteControl.get('nascimento')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Sexo</mat-label>
+            <mat-select formControlName="sexo">
+              <mat-option value="1">Masculino</mat-option>
+              <mat-option value="2">Feminino</mat-option>
+            </mat-select>
+            <mat-error *ngIf="athleteControl.get('sexo')?.hasError('required')">
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            style="width: 100%"
+            appearance="outline"
+            color="accent"
+            color="accent"
+          >
+            <mat-label>Responsável (Menor de Idade)</mat-label>
+            <input matInput formControlName="responsavel" type="text" />
+            <mat-error
+              *ngIf="athleteControl.get('responsavel')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>CPF</mat-label>
+            <input
+              matInput
+              formControlName="cpf"
+              type="text"
+              mask="000.000.000-00"
+            />
+            <mat-error *ngIf="athleteControl.get('cpf')?.hasError('required')">
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>RG</mat-label>
+            <input
+              matInput
+              formControlName="rg"
+              type="text"
+              mask="00.000.000-A"
+            />
+            <mat-error *ngIf="athleteControl.get('rg')?.hasError('required')">
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>CEP</mat-label>
+            <input
+              matInput
+              formControlName="cep"
+              type="text"
+              (keyup)="carregarEndereco(athleteControl.get('cep')!.value!)"
+              mask="00000-000"
+            />
+            <mat-error *ngIf="athleteControl.get('cep')?.hasError('required')">
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            style="width: 70%"
+            appearance="outline"
+            color="accent"
+            color="accent"
+          >
+            <mat-label>Endereço</mat-label>
+            <input matInput formControlName="endereco" type="text" />
+            <mat-error
+              *ngIf="athleteControl.get('endereco')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            style="width: 20%"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Número</mat-label>
+            <input
+              #inputNumero
+              matInput
+              formControlName="numero"
+              type="number"
+            />
+            <mat-error
+              *ngIf="athleteControl.get('numero')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            style="width: 60%"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Complemento</mat-label>
+            <input matInput formControlName="complemento" type="text" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Cidade</mat-label>
+            <input matInput formControlName="cidade" type="text" />
+            <mat-error
+              *ngIf="athleteControl.get('cidade')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Estado</mat-label>
+            <input matInput formControlName="uf" type="text" />
+            <mat-error *ngIf="athleteControl.get('uf')?.hasError('required')">
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 52%"
+          >
+            <mat-label>Pais</mat-label>
+            <input matInput formControlName="pais" type="text" />
+            <mat-error *ngIf="athleteControl.get('pais')?.hasError('required')">
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Profissão</mat-label>
+            <input matInput formControlName="profissao" type="text" />
+          </mat-form-field>
+          <div>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Federação</mat-label>
+              <input matInput formControlName="federacao" type="text" />
+            </mat-form-field>
+            <mat-icon
+              class="infoIcon"
+              matTooltip="Identidade de um atleta federado."
+              >help</mat-icon
+            >
+          </div>
+          <div class="vl"></div>
+          <h1 mat-dialog-title class="title" style="width: 100%">Contato</h1>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Telefone</mat-label>
+            <input
+              matInput
+              formControlName="telefone"
+              type="text"
+              mask="(00) 0000-0000"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Celular</mat-label>
+            <input
+              matInput
+              formControlName="celular"
+              type="text"
+              mask="(00) 00000-0000"
+            />
+            <mat-error
+              *ngIf="athleteControl.get('celular')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 100%"
+          >
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" type="email" />
+            <mat-error
+              *ngIf="athleteControl.get('email')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+            <mat-error *ngIf="athleteControl.get('email')?.hasError('email')">
+              Informe um email válido
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 100%"
+          >
+            <mat-label>Contato de Emergência</mat-label>
+            <input
+              matInput
+              formControlName="emergenciaContato"
+              type="text"
+              placeholder="Nome"
+            />
+            <mat-error
+              *ngIf="
+                athleteControl.get('emergenciaContato')?.hasError('required')
+              "
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Celular Emergência</mat-label>
+            <input
+              matInput
+              formControlName="emergenciaCelular"
+              type="text"
+              mask="(00) 00000-0000"
+            />
+            <mat-error
+              *ngIf="
+                athleteControl.get('emergenciaCelular')?.hasError('required')
+              "
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Telefone Emergência</mat-label>
+            <input
+              matInput
+              formControlName="emergenciaFone"
+              type="text"
+              mask="(00) 0000-0000"
+            />
+          </mat-form-field>
+          <div style="width: 100%">
+            <button
+              mat-raised-button
+              color="accent"
+              class="btnUpdate"
+              [disabled]="athleteControl.invalid"
+              (click)="salvarCadastro()"
+            >
+              <mat-icon>save</mat-icon>
+              <span>Salvar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Dados Médicos">
+      <div class="container">
+        <div *ngIf="dadosMedicos">
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+              style="width: 100%"
+            >
+              <div>
+                <label>Possuí Plano de Saúde?</label>
+                <br />
+                <mat-radio-group
+                  formControlName="plano"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <mat-form-field
+                appearance="outline"
+                color="accent"
+                style="width: 100%"
+              >
+                <mat-label>Qual Plano?</mat-label>
+                <input matInput formControlName="planoTipo" type="text" />
+              </mat-form-field>
+              <mat-form-field
+                appearance="outline"
+                color="accent"
+                style="width: 100%"
+              >
+                <mat-label>Qual Empresa?</mat-label>
+                <input matInput formControlName="planoEmpresa" type="text" />
+              </mat-form-field>
+            </mat-form-field>
+          </div>
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+              style="width: 100%"
+            >
+              <div>
+                <label>Você sofreu alguma cirurgia nos últimos 3 anos? </label>
+                <br />
+                <mat-radio-group
+                  formControlName="cirurgia"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <mat-form-field appearance="outline" color="accent">
+                <mat-label>Descreva</mat-label>
+                <input matInput formControlName="cirurgiaQual" type="text" />
+              </mat-form-field>
+            </mat-form-field>
+          </div>
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+            >
+              <div>
+                <label>Está usando alguma medicação?</label>
+                <br />
+                <mat-radio-group
+                  formControlName="medicacao"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <mat-form-field appearance="outline" color="accent">
+                <mat-label>Descreva</mat-label>
+                <input matInput formControlName="medicacaoQual" type="text" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="accent">
+                <mat-label>Há quanto tempo?</mat-label>
+                <input matInput formControlName="medicacaoTempo" type="text" />
+              </mat-form-field>
+            </mat-form-field>
+          </div>
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+            >
+              <div>
+                <label>Sentiu algum mal estar nos último 30 dias?</label>
+                <br />
+                <mat-radio-group
+                  formControlName="malestar"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <mat-form-field appearance="outline" color="accent">
+                <mat-label>Descreva</mat-label>
+                <input matInput formControlName="malestarQual" type="text" />
+              </mat-form-field>
+            </mat-form-field>
+          </div>
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+            >
+              <div>
+                <label
+                  >Você fez tratamento com acompanhamentos médico contra alguma
+                  doença nos últimos 3 anos?
+                </label>
+                <br />
+                <mat-radio-group
+                  formControlName="acompanhamento"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <mat-form-field appearance="outline" color="accent">
+                <mat-label>Descreva</mat-label>
+                <input
+                  matInput
+                  formControlName="acompanhamentoQual"
+                  type="text"
+                />
+              </mat-form-field>
+            </mat-form-field>
+          </div>
+          <div class="vl"></div>
+          <h1 mat-dialog-title class="title" style="width: 100%">
+            Confirme as enfermidades descritas abaixo
+          </h1>
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+            >
+              <div>
+                <label>Pressão Alta</label>
+                <br />
+                <mat-radio-group
+                  formControlName="pressaoalta"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+                  <input
+                    matInput
+                    formControlName="pressaoalta"
+                    type="text"
+                    [style.visibility]="'hidden'"
+                  />
+                </mat-radio-group>
+              </div>
+            </mat-form-field>
+          </div>
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+            >
+              <div>
+                <label>Desmaio</label>
+                <br />
+                <mat-radio-group
+                  formControlName="desmaio"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+
+                  <input
+                    matInput
+                    formControlName="desmaio"
+                    type="text"
+                    [style.visibility]="'hidden'"
+                  />
+                </mat-radio-group>
+              </div>
+            </mat-form-field>
+          </div>
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+            >
+              <div>
+                <label>Problemas Cardíacos</label>
+                <br />
+                <mat-radio-group
+                  formControlName="cardiaco"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+                  <input
+                    matInput
+                    formControlName="cardiaco"
+                    type="text"
+                    [style.visibility]="'hidden'"
+                  />
+                </mat-radio-group>
+              </div>
+            </mat-form-field>
+          </div>
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+            >
+              <div>
+                <label>Diabetes</label>
+                <br />
+                <mat-radio-group
+                  formControlName="diabetes"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+                  <input
+                    matInput
+                    formControlName="diabetes"
+                    type="text"
+                    [style.visibility]="'hidden'"
+                  />
+                </mat-radio-group>
+              </div>
+            </mat-form-field>
+          </div>
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+            >
+              <div>
+                <label>Asma</label>
+                <br />
+                <mat-radio-group
+                  formControlName="asma"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+                  <input
+                    matInput
+                    formControlName="asma"
+                    type="text"
+                    [style.visibility]="'hidden'"
+                  />
+                </mat-radio-group>
+              </div>
+            </mat-form-field>
+          </div>
+          <div mat-dialog-content [formGroup]="medicalControl">
+            <mat-form-field
+              appearance="outline"
+              color="accent"
+              class="divPlano"
+            >
+              <div>
+                <label>Alergia a Medicamentos</label>
+                <br />
+                <mat-radio-group
+                  formControlName="alergia"
+                  (change)="setValidators()"
+                >
+                  <mat-radio-button class="radio-button" [value]="0">
+                    Não
+                  </mat-radio-button>
+                  <mat-radio-button class="radio-button" [value]="1">
+                    Sim
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <mat-form-field appearance="outline" color="accent">
+                <mat-label>Descreva</mat-label>
+                <input matInput formControlName="alergiaQual" type="text" />
+              </mat-form-field>
+            </mat-form-field>
+            <div style="width: 100%">
+              <button
+                mat-raised-button
+                color="accent"
+                class="btnUpdate"
+                [disabled]="medicalControl.invalid"
+                (click)="salvarCadastro()"
+              >
+                <mat-icon>save</mat-icon>
+                <span>Salvar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Adicionais">
+      <div class="container">
+        <div
+          mat-dialog-content
+          [formGroup]="athleteControl"
+          class="form-fields"
+          *ngIf="atleta"
+        >
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 100%"
+          >
+            <label>Selecione um tamanho para Camisa</label>
+            <br />
+            <mat-radio-group formControlName="camisa">
+              <mat-radio-button class="radio-button" [value]="'Masculino P'">
+                P
+              </mat-radio-button>
+              <mat-radio-button class="radio-button" [value]="'Masculino M'">
+                M
+              </mat-radio-button>
+              <mat-radio-button class="radio-button" [value]="'Masculino G'">
+                G
+              </mat-radio-button>
+              <mat-radio-button
+                class="radio-button"
+                [value]="'Masculino GG'"
+                *ngIf="athleteControl.get('sexo')?.value == '1'"
+              >
+                GG
+              </mat-radio-button>
+              <mat-radio-button
+                class="radio-button"
+                [value]="'Masculino XG'"
+                *ngIf="athleteControl.get('sexo')?.value == '1'"
+              >
+                XG
+              </mat-radio-button>
+              <mat-radio-button
+                class="radio-button"
+                [value]="'Masculino XXG'"
+                *ngIf="athleteControl.get('sexo')?.value == '2'"
+              >
+                XG
+              </mat-radio-button>
+            </mat-radio-group>
+            <input
+              matInput
+              formControlName="camisa"
+              type="text"
+              [style.visibility]="'hidden'"
+            />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 100%"
+          >
+            <label>Selecione um tamanho para Camisa <i>(Ciclismo)</i></label>
+            <br />
+            <mat-radio-group formControlName="camisaCiclismo">
+              <mat-radio-button class="radio-button" [value]="'Masculino P'">
+                P
+              </mat-radio-button>
+              <mat-radio-button class="radio-button" [value]="'Masculino M'">
+                M
+              </mat-radio-button>
+              <mat-radio-button class="radio-button" [value]="'Masculino G'">
+                G
+              </mat-radio-button>
+              <mat-radio-button
+                class="radio-button"
+                [value]="'Masculino GG'"
+                *ngIf="athleteControl.get('sexo')?.value == '1'"
+              >
+                GG
+              </mat-radio-button>
+              <mat-radio-button
+                class="radio-button"
+                [value]="'Masculino XG'"
+                *ngIf="athleteControl.get('sexo')?.value == '1'"
+              >
+                XG
+              </mat-radio-button>
+              <mat-radio-button
+                class="radio-button"
+                [value]="'Masculino XXG'"
+                *ngIf="athleteControl.get('sexo')?.value == '2'"
+              >
+                XG
+              </mat-radio-button>
+            </mat-radio-group>
+            <input
+              matInput
+              formControlName="camisaCiclismo"
+              type="text"
+              [style.visibility]="'hidden'"
+            />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="adicionais"
+          >
+            <mat-label>Loja de bike preferida</mat-label>
+            <input matInput formControlName="mktLojaPreferida" type="text" />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="adicionais"
+          >
+            <mat-label>Marca/Modelo da sua bike</mat-label>
+            <input matInput formControlName="mktBikePreferida" type="text" />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="adicionais"
+          >
+            <mat-label>Marca/Modelo do seu câmbio/grupo</mat-label>
+            <input matInput formControlName="mktCambio" type="text" />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="adicionais"
+          >
+            <mat-label>Marca/Modelo do seu Freio</mat-label>
+            <input matInput formControlName="mktFreio" type="text" />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="adicionais"
+          >
+            <mat-label>Marca/Modelo da sua suspensão</mat-label>
+            <input matInput formControlName="mktSuspensao" type="text" />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="adicionais"
+          >
+            <mat-label>Marca do pneu da sua bike</mat-label>
+            <input matInput formControlName="mktMarcaPneu" type="text" />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="adicionais"
+          >
+            <mat-label>Modelo do pneu da sua bkie</mat-label>
+            <input matInput formControlName="mktModeloPneu" type="text" />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="adicionais"
+          >
+            <mat-label>Marca de Tênis Preferido</mat-label>
+            <input matInput formControlName="mktTenis" type="text" />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 100%"
+          >
+            <label>Qual o tamanho do aro que você utiliza?</label>
+            <br />
+            <mat-radio-group formControlName="mktAro">
+              <mat-radio-button class="radio-button" [value]="'Aro 26'">
+                Aro 26
+              </mat-radio-button>
+              <mat-radio-button class="radio-button" [value]="'Aro 27,5'">
+                Aro 27,5
+              </mat-radio-button>
+              <mat-radio-button class="radio-button" [value]="'Aro 29'">
+                Aro 29
+              </mat-radio-button>
+            </mat-radio-group>
+            <input
+              matInput
+              formControlName="mktAro"
+              type="text"
+              [style.visibility]="'hidden'"
+            />
+          </mat-form-field>
+        </div>
+        <div style="width: 100%" *ngIf="atleta">
+          <button
+            mat-raised-button
+            color="accent"
+            class="btnUpdate"
+            [disabled]="athleteControl.invalid && medicalControl.invalid"
+            (click)="salvarCadastro()"
+          >
+            <mat-icon>save</mat-icon>
+            <span>Salvar</span>
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Minhas Inscrições">
+      <div class="containerEventos">
+        <table
+          mat-table
+          style="width: 100%"
+          [dataSource]="dsInscricoes"
+          *ngIf="dsInscricoes"
+          class="mat-elevation-z8"
+        >
+          <ng-container matColumnDef="editarInscricao">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              Editar
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let inscricoes">
+              <div
+                [matTooltip]="
+                  !inscricoes.inscricoesAbertas ? 'Inscrições Fechadas' : ''
+                "
+              >
+                <button
+                  mat-stroked-button
+                  color="accent"
+                  (click)="editarInscricao(inscricoes.id)"
+                  [disabled]="!inscricoes.inscricoesAbertas"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="evento" color="accent">
+            <th mat-header-cell *matHeaderCellDef>Evento</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.nomeEvento }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="categoria" color="accent">
+            <th mat-header-cell *matHeaderCellDef>Categoria</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.nomeCategoria }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="pago" color="accent">
+            <th mat-header-cell *matHeaderCellDef class="text-center">Pago</th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <button
+                mat-icon-button
+                matTooltip="Pago"
+                color="primary"
+                *ngIf="element.pago"
+              >
+                <mat-icon style="color: #61dda0">check_circle</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                matTooltip="Aguardando pagamento"
+                color="accent"
+                *ngIf="!element.pago"
+              >
+                <mat-icon>hourglass_empty</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="opcoes" color="accent">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              Mais Opções
+            </th>
+            <td mat-cell *matCellDef="let inscricao" class="text-center">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="novoPagamento(inscricao)"
+                  *ngIf="inscricao.inscricoesAbertas && !inscricao.pago"
+                >
+                  <mat-icon>receipt</mat-icon>
+                  <span>Realizar Pagamento</span>
+                </button>
+                <button
+                  *ngIf="inscricao.linkBoleto != '' && !inscricao.pago"
+                  mat-menu-item
+                  (click)="visualizarBoleto(inscricao.linkBoleto)"
+                >
+                  <mat-icon>receipt</mat-icon>
+                  <span>Visualizar Boleto</span>
+                </button>
+                <button
+                  mat-menu-item
+                  (click)="abrirInscricoes(inscricao.idEvento)"
+                >
+                  <mat-icon>credit_card</mat-icon>
+                  <span>Ver Inscritos</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <div class="div-nenhum-evento" *ngIf="!dsInscricoes && semInscricoes">
+          <h1>Sem inscrições</h1>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Segurança">
+      <div class="container">
+        <h1>Alterar senha</h1>
+        <div mat-dialog-content [formGroup]="senhaControl" class="formSenha">
+          <mat-form-field
+            style="width: 50vh"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Senha atual</mat-label>
+            <input
+              matInput
+              formControlName="senhaAtual"
+              [type]="esconderSenha ? 'password' : 'text'"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="esconderSenha = !esconderSenha"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="esconderSenha"
+            >
+              <mat-icon>{{
+                esconderSenha ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error
+              *ngIf="senhaControl.get('senhaAtual')?.hasError('required')"
+            >
+              Informe sua senha atual
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            style="width: 50vh"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Nova senha</mat-label>
+            <input
+              matInput
+              formControlName="novaSenha"
+              [type]="esconderNovaSenha ? 'password' : 'text'"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="esconderNovaSenha = !esconderNovaSenha"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="esconderNovaSenha"
+            >
+              <mat-icon>{{
+                esconderNovaSenha ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error
+              *ngIf="senhaControl.get('novaSenha')?.hasError('minlength')"
+            >
+              Senha deve conter pelo menos 8 caracteres
+            </mat-error>
+            <mat-error
+              *ngIf="senhaControl.get('novaSenha')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            style="width: 50vh"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Confirme a nova senha</mat-label>
+            <input
+              matInput
+              formControlName="confirmarSenha"
+              [type]="esconderConfirmacaoSenha ? 'password' : 'text'"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="esconderConfirmacaoSenha = !esconderConfirmacaoSenha"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="esconderConfirmacaoSenha"
+            >
+              <mat-icon>{{
+                esconderConfirmacaoSenha ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error
+              *ngIf="
+                senhaControl.get('novaSenha')?.value !=
+                senhaControl.get('confirmarSenha')?.value
+              "
+            >
+              As senhas não são iguais
+            </mat-error>
+            <mat-error
+              *ngIf="senhaControl.get('confirmarSenha')?.hasError('required')"
+            >
+              Este campo é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <div style="width: 100%">
+            <button
+              mat-raised-button
+              color="accent"
+              class="btnUpdate"
+              [disabled]="senhaControl.invalid"
+              (click)="salvarNovaSenha()"
+            >
+              <mat-icon>save</mat-icon>
+              <span>Salvar</span>
+            </button>
+          </div>
+        </div>
+        <hr />
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="spinner" *ngIf="!atleta && !dadosMedicos && !dsInscricoes">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+</section>

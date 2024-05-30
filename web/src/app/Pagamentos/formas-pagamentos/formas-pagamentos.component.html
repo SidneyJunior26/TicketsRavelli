@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="div-center">
+    <h1>Escolha a Forma de Pagamento</h1>
+  </div>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Pix
+          <img
+            src="../../../assets/pix-icon.png"
+            alt=""
+            class="img-pix"
+            width="20px"
+        /></mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="container pix">
+        <div *ngIf="gerandoPix" class="div-center">
+          <mat-spinner color="accent"></mat-spinner>
+          <p>Gerando Pix...</p>
+        </div>
+        <div *ngIf="erroPix" class="div-center">
+          <mat-icon>warn</mat-icon>
+          Erro ao gerar o Pix. Tente novamente ou entre em contato com nosso
+          suporte
+          <a
+            href="https://api.whatsapp.com/send?phone=5511972337660"
+            target="_blank"
+            >clicando aqui</a
+          >
+          <button mat-raised-button color="accent" (click)="gerarPix()">
+            Gerar Pix
+          </button>
+          <div *ngIf="cpfInvalido"></div>
+        </div>
+        <div [hidden]="gerandoPix || erroPix">
+          <img [src]="qrCodeImageSrc" alt="" class="qrCode" />
+          <div class="div-copy-pix">
+            <h2>VALOR : {{ data.valorPagamento | currency : "BRL" }}</h2>
+            <p>Pix copia e cola:</p>
+            <input type="text" [value]="qrCode" />
+            <button
+              mat-stroked-button
+              [cdkCopyToClipboard]="qrCode"
+              (click)="abrirMensagemPixCopiado()"
+            >
+              <mat-icon>file_copy</mat-icon>
+            </button>
+          </div>
+          <h3>
+            Após realizar o pagamento, aguarde alguns segundos enquanto
+            confirmamos
+          </h3>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Boleto </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="container boleto">
+        <div *ngIf="erroBoleto" class="div-center">
+          <mat-icon>warn</mat-icon>
+          Erro ao gerar Boleto. Tente novamente ou entre em contato com nosso
+          suporte
+          <a
+            href="https://api.whatsapp.com/send?phone=5511972337660"
+            target="_blank"
+            >clicando aqui</a
+          >
+          <button mat-raised-button color="accent" (click)="gerarBoleto()">
+            Gerar Boleto
+          </button>
+        </div>
+        <div *ngIf="gerandoBoleto && linkBoleto == ''" class="div-center">
+          <mat-spinner color="accent"></mat-spinner>
+          <p>Gerando Boleto...</p>
+        </div>
+        <div *ngIf="!gerandoBoleto && data.evento && !erroBoleto">
+          <p>{{ data.evento.boletoInf1 }}</p>
+          <p>{{ data.evento.boletoInf2 }}</p>
+          <p>{{ data.evento.boletoInf3 }}</p>
+          <p>{{ data.evento.boletoInstrucao1 }}</p>
+          <p>{{ data.evento.boletoInstrucao2 }}</p>
+          <p>{{ data.evento.boletoInstrucao3 }}</p>
+          <p>
+            O boleto tem vencimento em 15 dias, e após essa data, será cobrada
+            uma taxa de 0,33% de juros por dia de atraso.
+          </p>
+          <button mat-raised-button color="accent" *ngIf="!gerandoBoleto">
+            <a target="_blank" (click)="visualizarBoleto()"
+              >Visualizar Boleto</a
+            >
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="div-cancelar">
+    <button mat-button color="accent" (click)="cancelar()">Cancelar</button>
+  </div>
+</div>

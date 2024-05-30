@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Persistence\" />
+    <None Remove="EmailServices\" />
+    <None Remove="EmailServices\Interfaces\" />
+    <None Remove="EmailServices\Implementations\" />
+    <None Remove="Pagamentos\Interfaces\" />
+    <None Remove="Pagamentos\Implementations\" />
+    <None Remove="GerenciaNet\" />
+    <None Remove="InputModels\" />
+    <None Remove="Persistence\Repositories\" />
+    <None Remove="Persistence\Repositories\Implementations\" />
+    <None Remove="Persistence\Repositories\Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\" />
+    <Folder Include="EmailServices\" />
+    <Folder Include="EmailServices\Interfaces\" />
+    <Folder Include="EmailServices\Implementations\" />
+    <Folder Include="GerenciaNet\Interfaces\" />
+    <Folder Include="GerenciaNet\Implementations\" />
+    <Folder Include="GerenciaNet\" />
+    <Folder Include="InputModels\" />
+    <Folder Include="Persistence\Repositories\" />
+    <Folder Include="Persistence\Repositories\Implementations\" />
+    <Folder Include="Persistence\Repositories\Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Flunt" Version="2.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+    <PackageReference Include="Gerencianet.NETCore.SDK" Version="3.0.0" />
+    <PackageReference Include="MySql.Data" Version="8.4.0" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicketsRavelli.Core\TicketsRavelli.Core.csproj" />
+  </ItemGroup>
+</Project>

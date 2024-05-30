@@ -1,0 +1,37 @@
+section {
+  width: 90vh;
+  height: auto;
+}
+
+h1 {
+  margin-top: 10px;
+}
+
+.mat-dialog-content-categoria {
+  overflow-x: hidden !important;
+  height: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.button-new {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.divIdade {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px 40px;
+}
+
+.vl {
+  width: 100%;
+  border: 1px solid gray;
+  margin: 10px 0 10px 0;
+}

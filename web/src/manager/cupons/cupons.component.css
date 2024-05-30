@@ -1,0 +1,38 @@
+.container {
+  width: auto;
+  height: auto;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+h1 {
+  color: #f9a826;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.divCadastro {
+  background-color: #303030;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.divSpinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+mat-spinner {
+  height: 24px !important;
+  width: 24px !important;
+}
+
+* svg {
+  width: 24px !important;
+  height: 24px !important;
+}

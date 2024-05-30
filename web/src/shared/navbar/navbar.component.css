@@ -1,0 +1,113 @@
+.toolbar {
+  background-color: #424242;
+  height: 10vh;
+  display: grid;
+  padding-top: 1vh;
+  overflow: hidden;
+}
+
+.functions {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 65vh;
+}
+
+.options {
+  width: 100%;
+}
+
+.logoMenu {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.logoMain {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.divNomeSistema {
+  display: flex;
+  align-items: center;
+}
+
+.btnOption {
+  width: 100%;
+}
+
+.btnMenu {
+  width: auto;
+}
+
+.btnUser {
+  width: auto;
+}
+
+img {
+  width: 20vh;
+  height: auto;
+}
+
+.imgPrincipal {
+  margin-top: -12vh;
+  width: 30vh;
+  height: 30vh;
+  cursor: pointer;
+}
+
+.divBtnAcessar {
+  display: flex;
+  flex-direction: column;
+}
+
+.divBtnAcessar span {
+  font-size: 15px;
+}
+
+.divBtnAcessar u {
+  color: #ff8b00;
+}
+
+@media (max-width: 516px) {
+  .toolbar {
+    overflow: visible;
+    height: auto;
+    max-height: none;
+    align-items: center;
+  }
+
+  .functions {
+    gap: 0;
+  }
+
+  .logoMain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 150px;
+  }
+
+  .imgPrincipal {
+    width: 80%;
+    height: auto;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .menu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .divBtnAcessar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

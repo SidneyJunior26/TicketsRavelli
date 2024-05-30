@@ -1,0 +1,33 @@
+<section>
+  <div *ngIf="regulamento || novoRegulamento">
+    <div
+      mat-dialog-content
+      [formGroup]="regulamentoControl"
+      class="mat-dialog-container-regulamento"
+    >
+      <h1>{{ nomeEvento }}</h1>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Regulamento</mat-label>
+        <textarea matInput formControlName="regulamento" rows="10"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Termos e Condições</mat-label>
+        <textarea matInput formControlName="termos" rows="10"></textarea>
+      </mat-form-field>
+    </div>
+    <div style="width: 100%">
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="regulamentoControl.invalid"
+        (click)="salvarRegulamento()"
+      >
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!regulamento && !novoRegulamento">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+</section>

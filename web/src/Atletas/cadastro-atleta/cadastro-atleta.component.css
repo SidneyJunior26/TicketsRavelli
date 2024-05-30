@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+section {
+  background-color: rgb(33, 33, 33);
+  color: white;
+  width: 100%;
+  min-height: 1000px;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 40px !important;
+}
+
+.container,
+.containerEventos {
+  height: auto;
+  padding: 40px;
+  margin: 30px;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #424242;
+}
+
+.div-nenhum-evento {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.mat-tab-group {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+mat-radio-button {
+  padding-bottom: 10px;
+}
+
+.form-fields {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px 40px;
+}
+
+.formSenha {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px 40px;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  max-width: 800px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.radio-button {
+  margin: 15px 10px 0 0;
+}
+
+.adicionais {
+  width: 30%;
+}
+
+.divPlano {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.infoIcon {
+  transform: scale(0.9);
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 16px;
+}
+
+@media (max-width: 1057px) {
+  .adicionais {
+    width: 100%;
+  }
+
+  .containerEventos {
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 0;
+    margin: 5px;
+    background-color: #424242;
+  }
+}

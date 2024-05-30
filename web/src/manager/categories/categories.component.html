@@ -1,0 +1,168 @@
+<section>
+  <mat-dialog-content class="mat-dialog-content-categoria">
+    <div class="container div-Consulta" *ngIf="painelConsulta">
+      <div class="button-new">
+        <button mat-raised-button color="accent" (click)="novaCategoria()">
+          <mat-icon>add</mat-icon>
+          <span>Nova Categoria</span>
+        </button>
+      </div>
+      <table
+        mat-table
+        [dataSource]="dsCategorias"
+        style="width: 100%"
+        *ngIf="dsCategorias"
+      >
+        <ng-container matColumnDef="deletar">
+          <th mat-header-cell *matHeaderCellDef class="text-center">Excluir</th>
+          <td mat-cell *matCellDef="let categorias" class="text-center">
+            <button
+              mat-stroked-button
+              color="warn"
+              (click)="deletarCategoria(categorias.id)"
+            >
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="editar">
+          <th mat-header-cell *matHeaderCellDef class="text-center">Editar</th>
+          <td mat-cell *matCellDef="let categorias" class="text-center">
+            <button
+              mat-stroked-button
+              color="accent"
+              (click)="editarCategoria(categorias.id)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="categoria" color="accent">
+          <th mat-header-cell *matHeaderCellDef>Percurso</th>
+          <td mat-cell *matCellDef="let categorias">
+            {{ categorias.percurso }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="nome" color="accent">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let categorias">
+            {{ categorias.descSubcategoria }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsCategorias"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumnsCategorias"
+        ></tr>
+      </table>
+      <mat-paginator
+        #paginatorCategoria
+        [length]="100"
+        pageSize="10"
+        showFirstLastpnl-buttons
+        [hidePageSize]="true"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+      <div *ngIf="!dsCategorias"><mat-spinner></mat-spinner></div>
+    </div>
+    <div class="container div-Cadastro" *ngIf="!painelConsulta">
+      <button mat-raised-button color="accent" (click)="voltarPainelConsulta()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        <span>Voltar</span>
+      </button>
+      <h1 mat-dialog-title style="width: 100%">
+        <b>Evento: </b> {{ nomeEvento }}
+      </h1>
+      <div
+        mat-dialog-content
+        [formGroup]="categoriaControl"
+        class="div-Cadastro"
+      >
+        <div style="width: 100%">
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>ID</mat-label>
+            <input formControlName="id" matInput readonly="true" />
+          </mat-form-field>
+        </div>
+        <mat-form-field style="width: 100%" appearance="outline" color="accent">
+          <mat-label>Nome Categoria</mat-label>
+          <input formControlName="descSubcategoria" matInput type="text" />
+        </mat-form-field>
+        <div style="width: 100%">
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Percurso</mat-label>
+            <mat-select formControlName="categoria">
+              <mat-option
+                *ngFor="let categorie of categorieList; let i = index"
+                [value]="i + 1"
+                >{{ categorie }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div style="width: 100%">
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Sexo</mat-label>
+            <mat-select formControlName="filtro_sexo">
+              <mat-option [value]="0">Livre</mat-option>
+              <mat-option [value]="1">Somente Masculino</mat-option>
+              <mat-option [value]="2">Somente Feminino</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div style="width: 100%">
+          <mat-form-field
+            appearance="outline"
+            style="width: 30%"
+            color="accent"
+          >
+            <mat-label>Filtrar por Dupla ou Quarteto</mat-label>
+            <mat-select formControlName="filtro_dupla">
+              <mat-option [value]="0">Não, categoria Individual</mat-option>
+              <mat-option [value]="1">Sim, categoria de Dupla</mat-option>
+              <mat-option [value]="2">Sim, categoria de Quarteto</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="vl"></div>
+        <h1 mat-dialog-title style="width: 100%">Idade Permitida</h1>
+        <div class="divIdade">
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>De</mat-label>
+            <input formControlName="idade_de" matInput type="number" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Até</mat-label>
+            <input formControlName="idade_ate" matInput type="number" />
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" color="accent" style="width: 100%">
+          <mat-label>Aviso para Categoria</mat-label>
+          <textarea
+            formControlName="aviso"
+            matInput
+            rows="5"
+            maxlength="500"
+          ></textarea>
+          <mat-hint>(Ex: PNE)</mat-hint>
+        </mat-form-field>
+        <div style="width: 100%">
+          <mat-checkbox formControlName="ativo">Ativo</mat-checkbox>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <div style="width: 100%" *ngIf="!painelConsulta">
+    <button
+      mat-raised-button
+      class="button-add"
+      [disabled]="categoriaControl.invalid"
+      (click)="salvarCategoria()"
+    >
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+  </div>
+</section>

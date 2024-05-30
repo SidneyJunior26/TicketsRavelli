@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="InputModels\" />
+    <None Remove="Services\" />
+    <None Remove="ViewModels\" />
+    <None Remove="InputModels\Atletas\" />
+    <None Remove="InputModels\Eventos\" />
+    <None Remove="ViewModels\Eventos\" />
+    <None Remove="InputModels\Inscricao\" />
+    <None Remove="ViewModels\Inscricoes\" />
+    <None Remove="InputModels\RegistrosMedicos\" />
+    <None Remove="InputModels\Regulamentos\" />
+    <None Remove="InputModels\Segurança\" />
+    <None Remove="InputModels\SubCategoria\" />
+    <None Remove="Services\Implementations\" />
+    <None Remove="Services\Security\" />
+    <None Remove="InputModels\Pagamentos\" />
+    <None Remove="InputModels\Pagamentos\Pix\" />
+    <None Remove="ViewModels\Relatorios\" />
+    <None Remove="InputModels\Afiliados\" />
+    <None Remove="InputModels\Pix\" />
+    <None Remove="Validators\" />
+    <None Remove="Services\Interfaces\" />
+    <None Remove="Validators\Atletas\" />
+    <None Remove="Validators\Inscricoes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="InputModels\" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="InputModels\Atletas\" />
+    <Folder Include="InputModels\Eventos\" />
+    <Folder Include="ViewModels\Eventos\" />
+    <Folder Include="InputModels\Inscricao\" />
+    <Folder Include="ViewModels\Inscricoes\" />
+    <Folder Include="InputModels\RegistrosMedicos\" />
+    <Folder Include="InputModels\Regulamentos\" />
+    <Folder Include="InputModels\Seguranca\" />
+    <Folder Include="InputModels\SubCategoria\" />
+    <Folder Include="Services\Implementations\" />
+    <Folder Include="Services\Security\" />
+    <Folder Include="InputModels\Pagamentos\" />
+    <Folder Include="InputModels\Pagamentos\Pix\" />
+    <Folder Include="ViewModels\Relatorios\" />
+    <Folder Include="InputModels\Afiliados\" />
+    <Folder Include="InputModels\Pix\" />
+    <Folder Include="Validators\" />
+    <Folder Include="Services\Interfaces\" />
+    <Folder Include="Validators\Atletas\" />
+    <Folder Include="Validators\Inscricoes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicketsRavelli.Core\TicketsRavelli.Core.csproj" />
+    <ProjectReference Include="..\TicketsRavelli.Infrastructure\TicketsRavelli.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+  </ItemGroup>
+</Project>

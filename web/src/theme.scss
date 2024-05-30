@@ -1,0 +1,84 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+$bv-brand: (
+  50: #fefbf3,
+  100: #fcf5e2,
+  200: #faeece,
+  300: #f8e7ba,
+  400: #f7e2ac,
+  500: #f5dd9d,
+  600: #f4d995,
+  700: #f2d48b,
+  800: #f0cf81,
+  900: #eec76f,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffffff,
+  A700: #fff7e6,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$my-app-accent-hover: (
+  50: #f2f4f1,
+  100: #dee4dc,
+  200: #c9d3c5,
+  300: #b3c1ad,
+  400: #a2b39c,
+  500: #92a68a,
+  600: #8a9e82,
+  700: #7f9577,
+  800: #758b6d,
+  900: #637b5a,
+  A100: #eeffe7,
+  A200: #c8ffb5,
+  A400: #a2ff81,
+  A700: #90ff68,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$my-app-primary: mat-palette($mat-blue-grey);
+$my-app-accent: mat-palette($bv-brand);
+$my-app-warn: mat-palette($mat-deep-orange);
+$my-app-theme: mat-dark-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-app-theme);
+
+.mat-accent {
+  button:hover {
+    background-color: #92a68a !important;
+  }
+
+  .mat-stroked-button:hover {
+    background-color: #92a68a !important;
+  }
+}

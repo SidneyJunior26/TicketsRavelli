@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+section {
+  background-color: rgb(33, 33, 33);
+  color: white;
+  width: 100%;
+  min-height: 1000px;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container {
+  height: auto;
+  margin: 0 0 40px 0;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+h1 {
+  color: #f5dd9d;
+  font-size: 37px;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+h2 {
+  font-size: 25px;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+input {
+  color: white;
+}
+
+mat-stepper {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-radio-button {
+  padding-bottom: 10px;
+}
+
+.form-fields {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px 40px;
+}
+
+.menu {
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.rblGenre {
+  margin-top: 15px;
+  color: white;
+}
+
+.chk-sem-numero {
+  margin-top: 15px;
+}
+
+.vl {
+  width: 100%;
+  border: 1px solid gray;
+  margin: 10px 0 10px 0;
+}
+
+.divisor {
+  border-left: 2px solid #f5dd9d;
+  height: 300px;
+  margin: 0 10px 0 10px;
+}
+
+.div-senha {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnUpdate {
+  padding: 5px 15px 5px 15px;
+  margin-bottom: 20px;
+}
+
+.btnUpdate mat-icon {
+  margin-right: 5px;
+}
+
+.infoIcon {
+  transform: scale(0.9);
+  font-size: 20px;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  max-width: 800px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.radio-button {
+  margin: 15px 10px 0 0;
+}
+
+.spinner-cep {
+  margin-top: 3vh;
+}
+
+.divPlano {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 16px;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.divPacotes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.divSelecionarPacote {
+  padding-right: 20px;
+}
+
+.divValorTotal {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: #545353;
+  padding: 20px;
+  width: 70vh;
+  border-radius: 10px;
+}
+
+.divMensagens {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.adicionais {
+  width: 30%;
+}
+
+.divRealizarPagamento {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.mat-radio-label-content {
+  white-space: normal !important;
+}
+
+.mat-radio-label {
+  white-space: normal;
+}
+
+mat-expansion-panel {
+  margin-bottom: 5vh;
+}
+
+::ng-deep .mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+  margin-top: 3px !important;
+}
+
+.btnPagamento {
+  padding: 5px 15px 5px 15px;
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 25px;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+@keyframes spinnerLoading {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinnerLoading:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #f5dd9d;
+  animation: spinnerLoading 0.8s linear infinite;
+}
+
+:host ::ng-deep .mat-vertical-content-container {
+  margin-left: 0 !important;
+}
+
+@media (max-width: 1057px) {
+  mat-stepper {
+    width: 95%;
+  }
+
+  .adicionais {
+    width: 100%;
+  }
+
+  .divPacotes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .divisor {
+    border-top: 2px solid #f5dd9d;
+    width: 100%;
+    height: 1px;
+    margin: 10px 0 10px 0;
+  }
+
+  .divValorTotal {
+    width: 100%;
+    justify-content: center;
+  }
+}

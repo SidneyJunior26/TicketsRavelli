@@ -1,0 +1,464 @@
+<div class="container mat-elevation-z8">
+  <div class="pnl-loading" *ngIf="loadingAtletas || loadingEventos">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+  <div [hidden]="loadingAtletas || loadingAtletas">
+    <mat-tab-group #tabgroup color="accent" mat-align-tabs="center">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">event</mat-icon>
+          Eventos
+        </ng-template>
+        <div class="container">
+          <div class="pnl-buttons">
+            <button
+              mat-raised-button
+              class="button-add"
+              (click)="novoEvento()"
+              color="accent"
+            >
+              <mat-icon>add</mat-icon>
+              <span>Novo Evento</span>
+            </button>
+          </div>
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            color="accent"
+          >
+            <mat-label>Filtrar</mat-label>
+            <input matInput (keyup)="aplicarFiltroEventos($event)" #input />
+          </mat-form-field>
+          <table
+            mat-table
+            [dataSource]="dsEventos"
+            style="width: 100%"
+            [hidden]="loadingEventos && dsEventos"
+          >
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let events">
+                <button
+                  mat-icon-button
+                  matTooltip="Inscrições Abertas"
+                  *ngIf="
+                    events.evento.ativaInscricao == 1 &&
+                    events.evento.ativaEvento == 1 &&
+                    events.evento.ativaAlteracaoInscricao == 1
+                  "
+                  class="subscribe-on"
+                >
+                  <mat-icon>done_all</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  matTooltip="Evento Aberto com Inscrições Fechadas"
+                  *ngIf="
+                    (events.evento.ativaInscricao == 0 ||
+                      events.evento.ativaAlteracaoInscricao == 0) &&
+                    events.evento.ativaEvento == 1 &&
+                    !isDataFimInscricaoPassada(events.evento.dataFimInscricao)
+                  "
+                  color="accent"
+                >
+                  <mat-icon>done</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  matTooltip="Inscrições Abertas e Evento Fechado"
+                  *ngIf="
+                    events.evento.ativaInscricao == 1 &&
+                    events.evento.ativaEvento == 0
+                  "
+                  color="primary"
+                >
+                  <mat-icon>help</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  matTooltip="Inscrições Fechadas"
+                  *ngIf="
+                    (events.evento.ativaInscricao == 0 &&
+                      events.evento.ativaEvento == 0) ||
+                    isDataFimInscricaoPassada(events.evento.dataFimInscricao)
+                  "
+                  color="warn"
+                >
+                  <mat-icon>highlight_off</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="deletar">
+              <th mat-header-cell *matHeaderCellDef class="text-center">
+                Excluir
+              </th>
+              <td mat-cell *matCellDef="let events" class="text-center">
+                <button
+                  mat-stroked-button
+                  color="warn"
+                  (click)="deletarEvento(events.evento.id)"
+                >
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="editar">
+              <th mat-header-cell *matHeaderCellDef class="text-center">
+                Editar
+              </th>
+              <td mat-cell *matCellDef="let events" class="text-center">
+                <button
+                  mat-stroked-button
+                  color="accent"
+                  (click)="editarEvento(events.evento)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="nome" color="accent">
+              <th mat-header-cell *matHeaderCellDef>Nome</th>
+              <td mat-cell *matCellDef="let events">
+                {{ events.evento.nome }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="data" color="accent">
+              <th mat-header-cell *matHeaderCellDef>Data</th>
+              <td mat-cell *matCellDef="let events">
+                {{ events.evento.data | date : "dd MMMM yyyy" }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="qtdInscritos" color="accent">
+              <th mat-header-cell *matHeaderCellDef>Qtd. Inscritos</th>
+              <td mat-cell *matCellDef="let events">
+                {{ events.qtdInscricoes }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="qtdPagos" color="accent">
+              <th mat-header-cell *matHeaderCellDef>Qtd. Pagos</th>
+              <td mat-cell *matCellDef="let events">
+                {{ events.qtdeInscricoesPagas }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="opções" color="accent">
+              <th mat-header-cell *matHeaderCellDef>Opções</th>
+              <td mat-cell *matCellDef="let events">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button
+                    mat-menu-item
+                    (click)="abrirInscricoes(events.evento.id)"
+                  >
+                    <mat-icon>credit_card</mat-icon>
+                    <span>Inscritos</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="
+                      carregarCategoria(
+                        events.evento.id,
+                        events.evento.nome,
+                        events.evento.categoria
+                      )
+                    "
+                  >
+                    <mat-icon>receipt</mat-icon>
+                    <span>Categorias</span>
+                  </button>
+
+                  <button
+                    mat-menu-item
+                    color="primary"
+                    (click)="
+                      carregarRegulamento(events.evento.id, events.evento.nome)
+                    "
+                  >
+                    <mat-icon>assignment</mat-icon>
+                    <span>Regulamento</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="cadastrarAtletaEvento(events.evento)"
+                  >
+                    <mat-icon>person</mat-icon>
+                    <span>Inscrever Atleta</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="efetivarAtletaInscricao(events.evento)"
+                  >
+                    <mat-icon>assignment_ind</mat-icon>
+                    <span>Efetivar Atleta</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="abrirComponenteCupom(events.evento)"
+                  >
+                    <mat-icon> local_offer</mat-icon>
+
+                    <span>Cupom de Desconto</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="abrirComponenteCortesia(events.evento)"
+                  >
+                    <mat-icon>money_off</mat-icon>
+                    <span>Cupom Cortesia</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="abrirComponenteRelatorio(events.evento)"
+                  >
+                    <mat-icon>assessment</mat-icon>
+                    <span>Relatórios</span>
+                  </button>
+                  <button mat-menu-item (click)="abrirAfiliados(events.evento)">
+                    <mat-icon>face</mat-icon>
+                    <span>Afiliados</span>
+                  </button>
+                  <button mat-menu-item (click)="validarPagamentoxPixNaoConfirmados(events.evento.id)">
+                    <mat-icon *ngIf="!loadingPagamentos">attach_money</mat-icon>
+                    <mat-spinner color="accent" *ngIf="loadingPagamentos"></mat-spinner>
+                    <span>{{ loadingPagamentos ? 'Validando Pagamentos...' : 'Validar Pag. Pix'}}</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsEvents"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumnsEvents"
+            ></tr>
+          </table>
+          <mat-paginator
+            #paginatorEvento
+            [length]="100"
+            pageSize="10"
+            showFirstLastpnl-buttons
+            [hidePageSize]="true"
+          >
+          </mat-paginator></div
+      ></mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">person</mat-icon>
+          Atletas
+        </ng-template>
+        <div class="container">
+          <div class="pnl-buttons">
+            <button
+              mat-raised-button
+              class="button-add"
+              color="accent"
+              (click)="cadastrarNovoAtleta()"
+            >
+              <mat-icon>add</mat-icon>
+              <span>Novo Atleta</span>
+            </button>
+          </div>
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            color="accent"
+          >
+            <mat-label>Filtrar</mat-label>
+            <input matInput (keyup)="aplicarFiltroAtletas($event)" #input />
+          </mat-form-field>
+          <table
+            mat-table
+            [dataSource]="dsAtletas"
+            style="width: 100%"
+            [hidden]="loadingAtletas && dsAtletas"
+          >
+            <ng-container matColumnDef="deletar">
+              <th mat-header-cell *matHeaderCellDef class="text-center">
+                Excluir
+              </th>
+              <td mat-cell *matCellDef="let atletas" class="text-center">
+                <button
+                  mat-stroked-button
+                  color="warn"
+                  (click)="deletarAtleta(atletas.id)"
+                >
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="editar">
+              <th mat-header-cell *matHeaderCellDef class="text-center">
+                Editar
+              </th>
+              <td mat-cell *matCellDef="let atletas" class="text-center">
+                <button
+                  mat-stroked-button
+                  color="accent"
+                  (click)="abrirCadastroAtleta(atletas)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="medico">
+              <th mat-header-cell *matHeaderCellDef class="text-center">
+                Dados Médicos
+              </th>
+              <td mat-cell *matCellDef="let atletas" class="text-center">
+                <button
+                  mat-stroked-button
+                  (click)="carregarDadosMedicos(atletas.id)"
+                  style="color: rgb(1, 154, 1)"
+                >
+                  <mat-icon>local_hospital</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="cpf" color="accent">
+              <th mat-header-cell *matHeaderCellDef>CPF/CNPJ</th>
+              <td mat-cell *matCellDef="let atletas">{{ atletas.cpf }}</td>
+            </ng-container>
+            <ng-container matColumnDef="nome" color="accent">
+              <th mat-header-cell *matHeaderCellDef>Nome</th>
+              <td mat-cell *matCellDef="let atletas">{{ atletas.nome }}</td>
+            </ng-container>
+            <ng-container matColumnDef="opções" color="accent">
+              <th mat-header-cell *matHeaderCellDef>Opções</th>
+              <td mat-cell *matCellDef="let atletas">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="alterarSenhaAtleta(atletas)">
+                    <mat-icon>vpn_key</mat-icon>
+                    <span>Alterar Senha</span>
+                  </button>
+                  <button mat-menu-item (click)="inscricoesAtleta(atletas)">
+                    <mat-icon>receipt</mat-icon>
+                    <span>Visualizar Inscrições</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsAthletes"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumnsAthletes"
+            ></tr>
+          </table>
+          <mat-paginator
+            #paginatorAtleta
+            [length]="100"
+            pageSize="10"
+            showFirstLastpnl-buttons
+            [hidePageSize]="true"
+          >
+          </mat-paginator>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">face</mat-icon>
+          Afiliados
+        </ng-template>
+        <div class="container">
+          <div class="pnl-buttons">
+            <button
+              mat-raised-button
+              class="button-add"
+              color="accent"
+              (click)="cadastrarNovoAfiliado()"
+            >
+              <mat-icon>add</mat-icon>
+              <span>Novo Afiliado</span>
+            </button>
+          </div>
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            color="accent"
+          >
+            <mat-label>Filtrar</mat-label>
+            <input matInput (keyup)="aplicarFiltroAtletas($event)" #input />
+          </mat-form-field>
+          <table mat-table [dataSource]="dsAfiliados" style="width: 100%">
+            <ng-container matColumnDef="deletar">
+              <th mat-header-cell *matHeaderCellDef class="text-center">
+                Excluir
+              </th>
+              <td mat-cell *matCellDef="let afiliado" class="text-center">
+                <button
+                  mat-stroked-button
+                  color="warn"
+                  (click)="deletarAfiliado(afiliado.id)"
+                >
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="editar">
+              <th mat-header-cell *matHeaderCellDef class="text-center">
+                Editar
+              </th>
+              <td mat-cell *matCellDef="let afiliado" class="text-center">
+                <button
+                  mat-stroked-button
+                  color="accent"
+                  (click)="abrirCadastroAfiliado(afiliado)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="cpf" color="accent">
+              <th mat-header-cell *matHeaderCellDef>CPF/CNPJ</th>
+              <td mat-cell *matCellDef="let afiliado">{{ afiliado.cpf }}</td>
+            </ng-container>
+            <ng-container matColumnDef="nome" color="accent">
+              <th mat-header-cell *matHeaderCellDef>Nome</th>
+              <td mat-cell *matCellDef="let afiliado">{{ afiliado.nome }}</td>
+            </ng-container>
+            <ng-container matColumnDef="porcentagem" color="accent">
+              <th mat-header-cell *matHeaderCellDef>Porcentagem</th>
+              <td mat-cell *matCellDef="let afiliado">
+                {{ afiliado.porcentagem }}%
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="opções" color="accent">
+              <th mat-header-cell *matHeaderCellDef>Opções</th>
+              <td mat-cell *matCellDef="let afiliado">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item [cdkCopyToClipboard]="afiliado.link">
+                    <mat-icon>file_copy</mat-icon>
+                    <span>Copiar Link</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedColumnsAfiliados"
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumnsAfiliados"
+            ></tr>
+          </table>
+          <mat-paginator
+            #paginatorAfiliado
+            [length]="100"
+            pageSize="10"
+            showFirstLastpnl-buttons
+            [hidePageSize]="true"
+          >
+          </mat-paginator>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

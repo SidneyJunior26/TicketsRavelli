@@ -1,0 +1,44 @@
+.container {
+  max-height: 80vh;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.divAtletaNaoCadastrado {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+h1 {
+  color: #f9a826;
+}
+
+th,
+td {
+  padding: 20px !important;
+  white-space: wrap;
+  min-width: 200px;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #f5dd9d;
+  animation: spinner 0.8s linear infinite;
+}

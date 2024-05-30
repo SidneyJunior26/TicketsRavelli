@@ -1,0 +1,17 @@
+h1 {
+  color: #f9a826;
+}
+
+.form-fields,
+.divPacotes {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px 40px;
+}
+
+.radio-button {
+  margin-top: 10px;
+  margin-right: 20px;
+}

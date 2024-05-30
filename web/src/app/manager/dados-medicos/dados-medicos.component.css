@@ -1,0 +1,40 @@
+.container {
+  width: 90%;
+  height: auto;
+  margin: 0 0 40px 0;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.form-fields {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px 40px;
+}
+
+.divPlano {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.radio-button {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.vl {
+  width: 100%;
+  border: 1px solid gray;
+  margin: 10px 0 10px 0;
+}

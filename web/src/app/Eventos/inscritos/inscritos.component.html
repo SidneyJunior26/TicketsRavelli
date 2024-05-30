@@ -1,0 +1,101 @@
+<div
+  class="container mat-elevation-z8 ng-view"
+  autoscroll="true"
+  [hidden]="loading && inscricoes.length == 0"
+>
+  <div class="header" *ngIf="inscricoes[0]">
+    <h1>{{ inscricoes[0].evento?.nome }}</h1>
+  </div>
+  <div>
+    <h2>Quantidade de Inscritos - {{ inscricoes.length }}</h2>
+    <div>
+      <mat-form-field
+      appearance="outline"
+      color="accent"
+      style="margin-right: 10px;"
+      >
+        <mat-label>Categoria</mat-label>
+        <mat-select
+        (selectionChange)="aplicarFiltroCategoria($event)"
+        >
+          <mat-option
+            *ngFor="let categoria of lstCategorias; let i = index"
+            [value]="categoria"
+
+            >{{ categoria }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+      appearance="outline"
+      color="accent"
+
+      >
+        <mat-label>Equipe</mat-label>
+        <mat-select
+        (selectionChange)="aplicarFiltroDupla($event)"
+        >
+          <mat-option
+            *ngFor="let equipe of lstEquipes; let i = index"
+            [value]="equipe"
+
+            >{{ equipe }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline" style="width: 100%" color="accent">
+      <mat-label>Filtrar</mat-label>
+      <input
+        matInput
+        (keyup)="aplicarFiltroInscricoes($event)"
+        #input
+        placeholder="Digite nome, categoria, equipe ou dupla para filtrar"
+      />
+    </mat-form-field>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dsInscritos">
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef>Atleta</th>
+          <td mat-cell *matCellDef="let inscricao">
+            {{ inscricao.atleta.nome }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="subcategoria.descSubcategoria">
+          <th mat-header-cell *matHeaderCellDef>Categoria</th>
+          <td mat-cell *matCellDef="let inscricao">
+            {{ inscricao.subcategoria.descSubcategoria }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="equipe">
+          <th mat-header-cell *matHeaderCellDef>Equipe</th>
+          <td mat-cell *matCellDef="let inscricao">{{ inscricao.equipe }}</td>
+        </ng-container>
+        <ng-container matColumnDef="dupla">
+          <th mat-header-cell *matHeaderCellDef>Dupla</th>
+          <td mat-cell *matCellDef="let inscricao">{{ inscricao.dupla }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsInscricoes"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumnsInscricoes"
+        ></tr>
+      </table>
+    </div>
+    <mat-paginator
+      #paginatorInscritos
+      [length]="inscricoes.length"
+      pageSize="10"
+      showFirstLastpnl-buttons
+      [hidePageSize]="true"
+    >
+    </mat-paginator>
+  </div>
+</div>
+<div
+  class="container mat-elevation-z8 loading"
+  *ngIf="loading && inscricoes.length == 0"
+>
+  <mat-spinner color="accent"></mat-spinner>
+</div>

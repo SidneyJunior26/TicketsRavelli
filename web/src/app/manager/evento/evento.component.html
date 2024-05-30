@@ -1,0 +1,449 @@
+<div class="container">
+  <div mat-dialog-content [formGroup]="eventoControl">
+    <h1>Informações Principais</h1>
+    <div class="event-main-info">
+      <image-upload #imageUpload [idEvento]="evento.id!"></image-upload>
+      <div class="info-lateral">
+        <div class="nome">
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Id</mat-label>
+            <input
+              matInput
+              [disabled]="true"
+              readonly="true"
+              formControlName="id"
+              type="text"
+            />
+          </mat-form-field>
+        </div>
+        <div class="nome">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 100%"
+          >
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome" type="text" />
+          </mat-form-field>
+        </div>
+        <div class="descricao">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="descricao"
+            style="width: 100%"
+          >
+            <mat-label>Descrição</mat-label>
+            <input matInput formControlName="descricao" />
+          </mat-form-field>
+        </div>
+        <div class="local">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            style="width: 100%"
+          >
+            <mat-label>Data e Local (p/ divulgação)</mat-label>
+            <input matInput formControlName="local" />
+          </mat-form-field>
+        </div>
+        <div class="data">
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Data do Evento</mat-label>
+            <input matInput [matDatepicker]="data" formControlName="data" />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="data"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #data></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="vl"></div>
+    <h1 style="width: 100%">Período das Incrições</h1>
+    <div style="width: 100%" class="divPacotes">
+      <mat-form-field appearance="outline" color="accent" style="width: 25%">
+        <mat-label>Início das Incrições (Início do 1º Lote)</mat-label>
+        <input
+          matInput
+          [matDatepicker]="dataIniInscricao"
+          formControlName="dataIniInscricao"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="dataIniInscricao"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #dataIniInscricao></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent" style="width: 20%">
+        <mat-label>Fim das Incrições</mat-label>
+        <input
+          matInput
+          [matDatepicker]="dataFimInscricao"
+          formControlName="dataFimInscricao"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="dataFimInscricao"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #dataFimInscricao></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="vl"></div>
+    <div style="width: 100%">
+      <h1>Datas de Cobranças</h1>
+    </div>
+    <div>
+      <div style="width: 100%" class="divPacotes">
+        <mat-form-field appearance="outline" color="accent" style="width: 20%">
+          <mat-label>Data inicio 2º lote</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dataDesconto"
+            formControlName="dataDesconto"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="dataDesconto"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #dataDesconto></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent" style="width: 20%">
+          <mat-label>Data inicio 3º lote</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dataValorNormal"
+            formControlName="dataValorNormal"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="dataValorNormal"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #dataValorNormal></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="vl"></div>
+    <div style="width: 100%">
+      <h1>Pacotes</h1>
+    </div>
+
+    <div class="divPacotes">
+      <mat-checkbox formControlName="pacote1Ativo">Pacote 1 Ativo</mat-checkbox>
+    </div>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Pacote 1 Descrição</mat-label>
+      <input matInput formControlName="pacote1Desc" />
+    </mat-form-field>
+    <div class="divPacotes">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Valor 1º Lote</mat-label>
+        <input
+          matInput
+          formControlName="valor1"
+          [value]="eventoControl.get('valor1')?.value"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Valor 2º Lote</mat-label>
+        <input
+          matInput
+          formControlName="valor2"
+          [value]="eventoControl.get('valor2')?.value"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Valor 3º Lote</mat-label>
+        <input
+          matInput
+          formControlName="valorNormal"
+          [value]="eventoControl.get('valorNormal')?.value"
+        />
+      </mat-form-field>
+    </div>
+    <div class="divPacotes">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #1</mat-label>
+        <input matInput formControlName="pacote1V1Pseg" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #2</mat-label>
+        <input matInput formControlName="pacote1V2Pseg" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #3</mat-label>
+        <input matInput formControlName="pacote1V3Pseg" />
+      </mat-form-field>
+    </div>
+    <div class="divPacotes">
+      <mat-checkbox formControlName="pacote2Ativo">Pacote 2 Ativo</mat-checkbox>
+    </div>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Pacote 2 Descrição</mat-label>
+      <input matInput formControlName="pacote2Desc" />
+    </mat-form-field>
+    <div class="divPacotes">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Pacote 2 Valor 1</mat-label>
+        <input
+          matInput
+          formControlName="pacote2V1"
+          [value]="eventoControl.get('pacote2V1')?.value"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Pacote 2 Valor 2</mat-label>
+        <input
+          matInput
+          formControlName="pacote2V2"
+          [value]="eventoControl.get('pacote2V2')?.value"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Pacote 2 Valor 3</mat-label>
+        <input
+          matInput
+          formControlName="pacote2V3"
+          [value]="eventoControl.get('pacote2V3')?.value"
+        />
+      </mat-form-field>
+    </div>
+    <div class="divPacotes">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #1</mat-label>
+        <input matInput formControlName="pacote2V1Pseg" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #2</mat-label>
+        <input matInput formControlName="pacote2V2Pseg" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #3</mat-label>
+        <input matInput formControlName="pacote2V3Pseg" />
+      </mat-form-field>
+    </div>
+
+    <div class="divPacotes">
+      <mat-checkbox formControlName="pacote3Ativo">Pacote 3 Ativo</mat-checkbox>
+    </div>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Pacote 3 Descrição</mat-label>
+      <input matInput formControlName="pacote3Desc" />
+    </mat-form-field>
+    <div class="divPacotes">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Pacote 3 Valor 1</mat-label>
+        <input
+          matInput
+          formControlName="pacote3V1"
+          [value]="eventoControl.get('pacote3V1')?.value"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Pacote 3 Valor 2</mat-label>
+        <input
+          matInput
+          formControlName="pacote3V2"
+          [value]="eventoControl.get('pacote3V2')?.value"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Pacote 3 Valor 3</mat-label>
+        <input
+          matInput
+          formControlName="pacote3V3"
+          [value]="eventoControl.get('pacote3V3')?.value"
+        />
+      </mat-form-field>
+    </div>
+    <div class="divPacotes">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #1</mat-label>
+        <input matInput formControlName="pacote3V1Pseg" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #1</mat-label>
+        <input matInput formControlName="pacote3V2Pseg" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #1</mat-label>
+        <input matInput formControlName="pacote3V3Pseg" />
+      </mat-form-field>
+    </div>
+
+    <div class="divPacotes">
+      <mat-checkbox formControlName="pacote4Ativo">Pacote 4 Ativo</mat-checkbox>
+    </div>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Pacote 4 Descrição</mat-label>
+      <input
+        placeholder="Pacote 4 Descrição"
+        matInput
+        formControlName="pacote4Desc"
+      />
+    </mat-form-field>
+    <div class="divPacotes">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Pacote 4 Valor 1</mat-label>
+        <input
+          matInput
+          formControlName="pacote4V1"
+          [value]="eventoControl.get('pacote4V1')?.value"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Pacote 4 Valor 2</mat-label>
+        <input
+          matInput
+          formControlName="pacote4V2"
+          [value]="eventoControl.get('pacote4V2')?.value"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Pacote 4 Valor 3</mat-label>
+        <input
+          matInput
+          formControlName="pacote4V3"
+          [value]="eventoControl.get('pacote4V3')?.value"
+        />
+      </mat-form-field>
+    </div>
+    <div class="divPacotes">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #1</mat-label>
+        <input matInput formControlName="pacote4V1Pseg" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #1</mat-label>
+        <input matInput formControlName="pacote4V2Pseg" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>PagSeguro #1</mat-label>
+        <input matInput formControlName="pacote4V3Pseg" />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Percursos</mat-label>
+      <input matInput formControlName="categoria" />
+    </mat-form-field>
+
+    <div class="vl"></div>
+    <div style="width: 100%">
+      <h1>Informações dos Boletos</h1>
+    </div>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Informações Boleto #1</mat-label>
+      <input matInput formControlName="boletoInf1" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Informações Boleto #2</mat-label>
+      <input matInput formControlName="boletoInf2" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Informações Boleto #3</mat-label>
+      <input matInput formControlName="boletoInf3" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Boleto Instrução 1</mat-label>
+      <input matInput formControlName="boletoInstrucao1" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Boleto Instrução 2</mat-label>
+      <input matInput formControlName="boletoInstrucao2" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Boleto Instrução 3</mat-label>
+      <input matInput formControlName="boletoInstrucao3" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Observações na Tela</mat-label>
+      <textarea rows="10" matInput formControlName="obsTela"></textarea>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      color="accent"
+      style="width: 100%; height: auto"
+    >
+      <mat-label>Confirmação de Cadastro</mat-label>
+      <textarea
+        rows="10"
+        matInput
+        formControlName="txtEmailCadastro"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Confirmação de Pagamento</mat-label>
+      <textarea rows="10" matInput formControlName="txtEmailBaixa"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <div>Tipo do Evento</div>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        formControlName="eventoTipo"
+      >
+        <mat-radio-button class="radio-button" [value]="0"
+          >Ciclismo
+        </mat-radio-button>
+        <mat-radio-button class="radio-button" [value]="1">
+          Corrida
+        </mat-radio-button>
+      </mat-radio-group>
+      <input
+        matInput
+        formControlName="eventoTipo"
+        type="text"
+        [style.visibility]="'hidden'"
+      />
+    </mat-form-field>
+
+    <div class="divPacotes">
+      <mat-checkbox formControlName="ativaInscricao"
+        >Inscrição Ativa</mat-checkbox
+      >
+      <mat-checkbox formControlName="ativaEvento">Evento Ativo</mat-checkbox>
+      <mat-checkbox formControlName="ativaAlteracaoInscricao"
+        >Permite Alterar Inscrição</mat-checkbox
+      >
+    </div>
+
+    <div mat-dialog-actions>
+      <button
+        mat-raised-button
+        class="button-add"
+        color="accent"
+        [disabled]="eventoControl.invalid"
+        (click)="salvarEvento()"
+      >
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+    </div>
+  </div>
+</div>

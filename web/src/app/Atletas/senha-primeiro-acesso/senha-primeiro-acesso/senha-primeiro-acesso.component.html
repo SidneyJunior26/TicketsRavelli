@@ -1,0 +1,66 @@
+<div class="container">
+  <div mat-dialog-content [formGroup]="senhaControl" class="formSenha">
+    <h1>Alterar senha</h1>
+    <p>
+      Atualizamos o nosso sistema e por questão de segurança enviamos um código
+      de segurança para seu e-mail.
+    </p>
+    <div>
+      <mat-form-field
+        style="width: 50vh; margin-right: 1vh"
+        appearance="outline"
+        color="accent"
+      >
+        <mat-label>Informe o código recebido no seu e-mail</mat-label>
+        <input matInput formControlName="codigoSeguranca" type="text" />
+        <mat-error
+          *ngIf="senhaControl.get('codigoSeguranca')?.hasError('required')"
+        >
+          Informe o código de segurança
+        </mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="loading"
+        (click)="enviarCodigo()"
+      >
+        <ng-container *ngIf="!loading; else countdownText">
+          Reenviar Código
+        </ng-container>
+        <ng-template #countdownText>
+          <span>{{ countdown }} seg. para reenviar código</span>
+        </ng-template>
+      </button>
+    </div>
+    <mat-form-field style="width: 50vh" appearance="outline" color="accent">
+      <mat-label>Nova senha</mat-label>
+      <input matInput formControlName="novaSenha" type="password" />
+      <mat-error *ngIf="senhaControl.get('novaSenha')?.hasError('required')">
+        Este campo é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field style="width: 50vh" appearance="outline" color="accent">
+      <mat-label>Confirme a nova senha</mat-label>
+      <input matInput formControlName="confirmarSenha" type="password" />
+      <mat-error
+        *ngIf="senhaControl.get('confirmarSenha')?.hasError('required')"
+      >
+        Este campo é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <button
+        mat-raised-button
+        color="accent"
+        class="btnUpdate"
+        [disabled]="senhaControl.invalid"
+        (click)="salvarNovaSenha()"
+      >
+        <mat-icon>save</mat-icon>
+        <span>Salvar</span>
+      </button>
+    </div>
+  </div>
+  <hr />
+</div>

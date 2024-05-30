@@ -1,0 +1,76 @@
+<div class="container" *ngIf="inscricao">
+  <div [formGroup]="inscricaoControl">
+    <mat-form-field
+      appearance="outline"
+      color="accent"
+      style="margin-right: 10px; width: 100%"
+    >
+      <mat-label>Percurso</mat-label>
+      <mat-select formControlName="categoria">
+        <mat-option
+          *ngFor="let item of lstCategoria; let i = index"
+          value="{{ i + 1 }}"
+          (onSelectionChange)="preCarregarCategoria(i + 1, item)"
+          >{{ item }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <label id="example-radio-group-label">Categoria*</label>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="radio-group"
+      formControlName="subCategoria"
+      style="width: 90%"
+      (change)="carregarFiltroDupla()"
+    >
+      <mat-radio-button
+        class="radio-button"
+        *ngFor="let subcategory of subCategorieList"
+        [value]="subcategory.id"
+        style="width: 100%"
+      >
+        <p style="white-space: normal">
+          <b>{{ subcategory.name }}</b>
+        </p>
+        <div *ngIf="subcategory.aviso != ''">
+          <p style="white-space: normal">
+            <i>{{ subcategory.aviso }}</i>
+          </p>
+        </div>
+      </mat-radio-button>
+      <mat-error *ngIf="inscricaoControl.get('subCategoria')?.invalid"
+        >Informe sua categoria</mat-error
+      >
+    </mat-radio-group>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Equipe</mat-label>
+      <input matInput formControlName="equipe" type="text" />
+    </mat-form-field>
+    <mat-form-field
+      appearance="outline"
+      color="accent"
+      style="width: 100%"
+      *ngIf="subCategoria && filtroDupla == 1"
+    >
+      <mat-label>Nome Dupla</mat-label>
+      <input matInput formControlName="nomeDupla" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%">
+      <mat-label>Nome Trio/Quarteto</mat-label>
+      <input matInput formControlName="nomeTrioQuarteto" type="text" />
+    </mat-form-field>
+    <div style="width: 100%">
+      <button
+        mat-raised-button
+        color="accent"
+        class="btnUpdate"
+        [disabled]="inscricaoControl.invalid"
+        (click)="atualizarInscricao()"
+      >
+        <mat-icon>save</mat-icon>
+        <span>Salvar</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -221,6 +221,7 @@ export class CadastroAtletaComponent implements OnInit {
   private carregarInscricoes() {
     this.inscricoesService.getAthleteSubscriptions(this.cpfAtleta).subscribe(
       (inscricoes) => {
+        console.log(inscricoes);
         this.inscricoesAtleta = inscricoes;
 
         if (this.inscricoesAtleta.length > 0) {
@@ -606,13 +607,13 @@ export class CadastroAtletaComponent implements OnInit {
     this.eventosService
       .consultarValorPacote(inscricao.id!)
       .subscribe((retorno) => {
-        console.log(retorno.valor);
         this.dialog.open(FormasPagamentosComponent, {
           data: {
             idInscricao: inscricao.id!,
             atleta: this.atleta,
             evento: evento,
             valorPagamento: Number(retorno.valor),
+            cupomDesconto: ''
           },
           disableClose: true, // Isso impede que o usuário feche o diálogo clicando fora dele
         });

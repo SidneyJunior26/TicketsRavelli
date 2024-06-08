@@ -7,38 +7,27 @@
     <h1>{{ inscricoes[0].evento?.nome }}</h1>
   </div>
   <div>
-    <h2>Quantidade de Inscritos - {{ inscricoes.length }}</h2>
     <div>
       <mat-form-field
-      appearance="outline"
-      color="accent"
-      style="margin-right: 10px;"
+        appearance="outline"
+        color="accent"
+        style="margin-right: 10px"
       >
         <mat-label>Categoria</mat-label>
-        <mat-select
-        (selectionChange)="aplicarFiltroCategoria($event)"
-        >
+        <mat-select (selectionChange)="aplicarFiltroCategoria($event)">
           <mat-option
             *ngFor="let categoria of lstCategorias; let i = index"
             [value]="categoria"
-
             >{{ categoria }}</mat-option
           >
         </mat-select>
       </mat-form-field>
-      <mat-form-field
-      appearance="outline"
-      color="accent"
-
-      >
+      <mat-form-field appearance="outline" color="accent">
         <mat-label>Equipe</mat-label>
-        <mat-select
-        (selectionChange)="aplicarFiltroDupla($event)"
-        >
+        <mat-select (selectionChange)="aplicarFiltroDupla($event)">
           <mat-option
             *ngFor="let equipe of lstEquipes; let i = index"
             [value]="equipe"
-
             >{{ equipe }}</mat-option
           >
         </mat-select>
@@ -83,14 +72,6 @@
         ></tr>
       </table>
     </div>
-    <mat-paginator
-      #paginatorInscritos
-      [length]="inscricoes.length"
-      pageSize="10"
-      showFirstLastpnl-buttons
-      [hidePageSize]="true"
-    >
-    </mat-paginator>
   </div>
 </div>
 <div

@@ -917,6 +917,7 @@
                 <button
                   mat-menu-item
                   (click)="novoPagamento(inscricao)"
+                  *ngIf="inscricao.inscricoesAbertas && !inscricao.pago"
                 >
                   <mat-icon>receipt</mat-icon>
                   <span>Realizar Pagamento</span>

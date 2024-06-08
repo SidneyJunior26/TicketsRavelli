@@ -460,8 +460,7 @@
                   formControlName="mktAro"
                 >
                   <mat-radio-button
-                    value="
-              Aro 26"
+                    value="Aro 26"
                     class="radio-button"
                   >
                     Aro 26
@@ -469,7 +468,7 @@
                   <mat-radio-button class="radio-button" value="Aro 27,5">
                     Aro 27,5
                   </mat-radio-button>
-                  <mat-radio-button class="radio-button" alue="Aro 29">
+                  <mat-radio-button class="radio-button" value="Aro 29">
                     Aro 29
                   </mat-radio-button>
                 </mat-radio-group>
@@ -951,7 +950,16 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div *ngIf="categoriaEquipe">
+        <div *ngIf="categoriaQuarteto">
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Quarteto</mat-label>
+            <input matInput type="text" formControlName="quarteto" />
+            <mat-error *ngIf="eventControl.get('quarteto')?.hasError('required')">
+              Informe o nome do seu quarteto
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
           <mat-form-field appearance="outline" color="accent">
             <mat-label>Equipe</mat-label>
             <input matInput type="text" formControlName="equipe" />
@@ -1029,7 +1037,7 @@
           <mat-spinner color="accent"></mat-spinner>
         </div>
         <div class="divSelecionarPacote" *ngIf="pacotes && !loadingPacotes">
-          <ng-template matStepLabel>Pagamento</ng-template>
+          <ng-template matStepLabel>Pacotes</ng-template>
           <h1 style="color: #f5dd9d"><b>Escolha o Pacote</b></h1>
           <mat-radio-group
             class="example-radio-group"

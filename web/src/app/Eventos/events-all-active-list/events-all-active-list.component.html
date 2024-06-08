@@ -105,6 +105,23 @@
             {{ event.descricao }}
           </p>
         </mat-card-content>
+        <mat-card-actions *ngIf="event.ativaInscricao == 1">
+          <div class="divSubscribe">
+            <h1>INSCRIÇÕES ENCERRADAS</h1>
+          </div>
+          <div class="divSubscribe">
+            <div class="divInformacoes">
+              <button
+                mat-stroked-button
+                color="accent"
+                class="btnInformacoes"
+                (click)="abrirInscricoes(event.id)"
+              >
+                Lista de Inscritos
+              </button>
+            </div>
+          </div>
+        </mat-card-actions>
       </mat-card>
       <div
         class="divComming"

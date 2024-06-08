@@ -8,9 +8,9 @@ public class UpdateAthleteInputModelValidator : AbstractValidator<UpdateAthleteI
     public UpdateAthleteInputModelValidator()
     {
         RuleFor(x => x.Nome)
-        .NotEmpty()
-        .NotNull()
-        .WithMessage("Por favor, informe seu Nome");
+            .NotEmpty()
+            .NotNull()
+            .WithMessage("Por favor, informe seu Nome");
 
         RuleFor(x => x.Nascimento)
             .NotEmpty()

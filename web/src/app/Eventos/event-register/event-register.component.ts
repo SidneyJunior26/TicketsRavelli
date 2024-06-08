@@ -115,7 +115,7 @@ export class EventRegisterComponent implements OnInit {
   kitCamisa: boolean = false;
   kitCamisaPoliamida: boolean = false;
   categoriaDupla: boolean = false;
-  categoriaEquipe: boolean = false;
+  categoriaQuarteto: boolean = false;
 
   camisa: string;
   camisaCiclismo: string;
@@ -153,6 +153,7 @@ export class EventRegisterComponent implements OnInit {
     subCategoria: new FormControl('', Validators.required),
     pacote: new FormControl(1, Validators.required),
     dupla: new FormControl(''),
+    quarteto: new FormControl(''),
     equipe: new FormControl(''),
   });
 
@@ -765,31 +766,31 @@ export class EventRegisterComponent implements OnInit {
   protected verificaCampoDupla(filtroDupla: number) {
     if (filtroDupla == 0) {
       this.categoriaDupla = false;
-      this.categoriaEquipe = false;
+      this.categoriaQuarteto = false;
 
       this.eventControl.get('dupla')?.clearValidators();
       this.eventControl.get('dupla')?.updateValueAndValidity();
 
-      this.eventControl.get('equipe')?.clearValidators();
-      this.eventControl.get('equipe')?.updateValueAndValidity();
+      this.eventControl.get('quarteto')?.clearValidators();
+      this.eventControl.get('quarteto')?.updateValueAndValidity();
     } else if (filtroDupla == 1) {
       this.categoriaDupla = true;
-      this.categoriaEquipe = false;
+      this.categoriaQuarteto = false;
 
       this.eventControl.get('dupla')?.addValidators(Validators.required);
       this.eventControl.get('dupla')?.updateValueAndValidity();
 
-      this.eventControl.get('equipe')?.clearValidators();
-      this.eventControl.get('equipe')?.updateValueAndValidity();
+      this.eventControl.get('quarteto')?.clearValidators();
+      this.eventControl.get('quarteto')?.updateValueAndValidity();
     } else {
       this.categoriaDupla = false;
-      this.categoriaEquipe = true;
+      this.categoriaQuarteto = true;
 
       this.eventControl.get('dupla')?.clearValidators();
       this.eventControl.get('dupla')?.updateValueAndValidity();
 
-      this.eventControl.get('equipe')?.addValidators(Validators.required);
-      this.eventControl.get('equipe')?.updateValueAndValidity();
+      this.eventControl.get('quarteto')?.addValidators(Validators.required);
+      this.eventControl.get('quarteto')?.updateValueAndValidity();
     }
   }
 
@@ -1134,8 +1135,8 @@ export class EventRegisterComponent implements OnInit {
       dupla: this.eventControl.get('dupla')?.value
         ? this.eventControl.get('dupla')?.value!.toString()
         : '',
-      quarteto: this.eventControl.get('equipe')?.value
-        ? this.eventControl.get('equipe')?.value!
+      quarteto: this.eventControl.get('quarteto')?.value
+        ? this.eventControl.get('quarteto')?.value!
         : '',
       pacote: Number(this.pacoteSelecionado),
       aceiteRegulamento: this.regulamentoAceito,

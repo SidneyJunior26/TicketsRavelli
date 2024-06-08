@@ -44,7 +44,10 @@ public class EventRepsitory : IEventRepository {
     public async Task<List<Evento>> QueryUpComingAsync() {
         return await _context.Eventos
                 .AsNoTracking()
-                .Where(e => e.DataIniInscricao > DateTime.Now && e.AtivaEvento == 1)
+                .Where(e =>
+                (e.DataIniInscricao > DateTime.Now && e.AtivaEvento == 1)
+                ||
+                (e.DataFimInscricao < DateTime.Now && e.Data > DateTime.Now))
                 .OrderByDescending(e => e.DataIniInscricao)
                 .ToListAsync();
     }
